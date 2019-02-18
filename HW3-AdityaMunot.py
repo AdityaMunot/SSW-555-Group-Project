@@ -104,7 +104,7 @@ def Gedreader(path):  # parsing the gedcom file
                 if(s[0] == '2'):
                     if(s[1] == 'DATE'):
                         date = s[4] + " " + s[3] + " " + s[2]
-                        elif(dateID == 'BIRT'):
+                        if(dateID == 'BIRT'):
                             indiData[3] = date
                         elif(dateID == 'DEAT'):
                             indiData[4] = date
@@ -147,10 +147,10 @@ def marriage_before_death(id, marriage, husbandid, wifeid):
 
 # Function calling
 """next 2 lines are for mac"""
-fileName = "MyFamily.ged"
-individual_list, family_list = Gedreader(fileName)
+#fileName = "MyFamily.ged"
+#individual_list, family_list = Gedreader(fileName)
 """this line is to read in windowas"""
-# individual_list, family_list = Gedreader("E:\Py Project\SSW555\My-Family-Aditya-Munot-28-Jan-2019.ged")
+individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
 
 # printing the output about individuals
 print("Individuals")
