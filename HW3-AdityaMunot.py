@@ -146,10 +146,6 @@ def marriage_before_death(id, marriage, husbandid, wifeid):
 
 
 # Function calling
-"""next 2 lines are for mac"""
-#fileName = "MyFamily.ged"
-#individual_list, family_list = Gedreader(fileName)
-"""this line is to read in windowas"""
 individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
 
 # printing the output about individuals
