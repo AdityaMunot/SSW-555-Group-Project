@@ -1,4 +1,4 @@
-from gedcom_parser import *
+from HW3AdityaMunot import *
 import unittest
 
 class TestSprint1(unittest.TestCase):
