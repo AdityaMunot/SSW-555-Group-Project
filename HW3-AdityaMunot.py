@@ -1,7 +1,7 @@
 """
 Project 03: Parsing, Retrieving Data and printing in pretty table.
 
-Author: Aditya R Munot
+Author: Aditya R Munot, Shrey S Vaity, Srikanth Kamath
 """
 # Importing file
 from prettytable import PrettyTable
@@ -182,7 +182,6 @@ for i in family_list:
 print(table)
 
 
-
 def marriage_before_death(family_list, individual_list): #user story 05_srikanth
 
 	flag=0
@@ -194,6 +193,7 @@ def marriage_before_death(family_list, individual_list): #user story 05_srikanth
 						print("marriage date greater than death death")
 						flag = 1
 	return flag
+
 
 def fewer_than_15_siblings(family_list): #user story 15_srikanth
 
