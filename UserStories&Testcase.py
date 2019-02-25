@@ -5,12 +5,15 @@ import unittest
 
 
 def CheckDates(edate):  # Check dates in gedcom file are before current date
-    edate = datetime.strptime(edate, "%Y %b %d")
-    today = datetime.today()
-    if edate > today:
-        return "NA"
-    else:
+    if edate == "NA":
         return edate
+    else:
+        edate = datetime.strptime(edate, "%Y %b %d")
+        today = datetime.today()
+        if edate > today:
+            return "NA"
+        else:
+            return edate.strftime("%Y %b %d")
 
 # User Story 6
 
@@ -36,24 +39,24 @@ class GedreaderTest(unittest.TestCase):
     def test_BirthDates(self):
         today = datetime.today()
         for i in individual_list:
-            self.assertLess(CheckDates(i[3]), today)
+            self.assertLess(datetime.strptime(CheckDates(i[3]), "%Y %b %d"), today)
 
     def test_DeathDates(self):
         today = datetime.today()
         for i in individual_list:
                 if i[4] != "NA":
-                        self.assertLess(CheckDates(i[4]), today)
+                        self.assertLess(datetime.strptime(CheckDates(i[4]), "%Y %b %d"), today)
 
     def test_MarriedDates(self):
         today = datetime.today()
         for i in family_list:
-                self.assertLess(CheckDates(i[3]), today)
+                self.assertLess(datetime.strptime(CheckDates(i[3]), "%Y %b %d"), today)
 
     def test_DivorcedDates(self):
         today = datetime.today()
         for i in family_list:
                 if i[4] != "NA":
-                        self.assertLess(CheckDates(i[4]), today)
+                        self.assertLess(datetime.strptime(CheckDates(i[4]), "%Y %b %d"), today)
 
     def test_Divorce_before_death(self):
         for i in family_list:
