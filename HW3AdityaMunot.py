@@ -118,12 +118,6 @@ def Gedreader(path):  # parsing the gedcom file
 						indiData[1] = newname[0] + " " + s[2]
 		return individual_list, family_list
 
-# Running User Stories
-
-individual_list = CheckDates(individual_list)  # Running User Story 1
-family_list = CheckDates(family_list)  # Running User Story 1
-family_list = Divorce_before_death(family_list)  # Running User Story 6
-
 
 def birth_before_death(id, birth, death):
 	"""Check if death before birth"""
@@ -171,6 +165,12 @@ def marriage_before_death(id, marriage, husbandid, wifeid):
 
 # Function calling
 individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
+
+# Running User Stories
+
+individual_list = CheckDates(individual_list)  # Running User Story 1
+family_list = CheckDates(family_list)  # Running User Story 1
+family_list = Divorce_before_death(family_list)  # Running User Story 6
 
 # printing the output about individuals
 print("Individuals")
