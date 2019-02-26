@@ -1,7 +1,7 @@
 from datetime import date, datetime
 
 # User Story 4
-def Marriage_befor_divorce(family_list):  # Check dates in gedcom file are before current date
+def Marriage_befor_divorce(family_list):
     error = 0
     for i in family_list:
         if i[2] == "DIV":
@@ -15,7 +15,7 @@ def Marriage_befor_divorce(family_list):  # Check dates in gedcom file are befor
 
 # User Story 7
 
-def Less_then_150_years_old(family_list):  # Check Divorce before death
+def Less_then_150_years_old(family_list): 
     today = datetime.today()
     error = 0
     for i in family_list:
