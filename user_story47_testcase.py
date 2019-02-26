@@ -6,15 +6,11 @@ import datetime
 
 class user_story47_Test(unittest.TestCase):
 
-    def test_MarriedDates(self):  # testCase for Check Married
+    def test_Marriage_befor_divorce(self): 
             self.assertEqual(user.Marriage_befor_divorce(family_list), 0)
 
-    def test_DivorcedDates(self):  # testCase for Check Divorce
-        today = datetime.today()
-        for i in family_list:
-                if i[4] != "NA":
-                        self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
-
+    def test_Less_then_150_years_old(self):  
+         self.assertEqual(user.test_Less_then_150_years_old(family_list), 0)
 
 
 if __name__ == '__main__':
