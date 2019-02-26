@@ -170,9 +170,6 @@ individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
 
 individual_list = CheckDates(individual_list)  # Running User Story 1
 family_list = CheckDates(family_list)  # Running User Story 1
-family_list = Divorce_before_death(family_list)  # Running User Story 6
-family_list = Marriage_before_divorce(family_list) # Running User Story 4
-individual_list = lessthen150(individual_list) # Running User Story 7
 
 # printing the output about individuals
 print("Individuals")
