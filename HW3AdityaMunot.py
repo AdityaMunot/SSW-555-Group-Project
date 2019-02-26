@@ -171,6 +171,8 @@ individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
 individual_list = CheckDates(individual_list)  # Running User Story 1
 family_list = CheckDates(family_list)  # Running User Story 1
 family_list = Divorce_before_death(family_list)  # Running User Story 6
+family_list = Marriage_before_divorce(family_list) # Running User Story 4
+individual_list = lessthen150(individual_list) # Running User Story 7
 
 # printing the output about individuals
 print("Individuals")
@@ -189,7 +191,7 @@ for i in family_list:
 print(table)
 
 
-def marriage_before_death(family_list, individual_list): #user story 05_srikanth
+"""def marriage_before_death(family_list, individual_list): #user story 05_srikanth
 
 	flag=0
 	for i in individual_list:
@@ -199,7 +201,7 @@ def marriage_before_death(family_list, individual_list): #user story 05_srikanth
 					if j[3] > i[4]:
 						print("marriage date greater than death death")
 						flag = 1
-	return flag
+	return flag"""
 
 
 def fewer_than_15_siblings(family_list): #user story 15_srikanth
