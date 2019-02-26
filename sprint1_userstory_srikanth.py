@@ -1,4 +1,4 @@
-from gedcom_parser import Gedreader
+from HW3AdityaMunot import Gedreader
 
 def marriage_before_death(family_list, individual_list): #user story 05
 
