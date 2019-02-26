@@ -166,11 +166,6 @@ def marriage_before_death(id, marriage, husbandid, wifeid):
 # Function calling
 individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
 
-# Running User Stories
-
-individual_list = CheckDates(individual_list)  # Running User Story 1
-family_list = CheckDates(family_list)  # Running User Story 1
-
 # printing the output about individuals
 print("Individuals")
 table = PrettyTable(["ID", "Name", "Gender", "Birthday",
