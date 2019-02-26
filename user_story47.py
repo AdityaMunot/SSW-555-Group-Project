@@ -1,26 +1,16 @@
-from datetime import date, datetime
 
 # User Story 4
-def Marriage_befor_divorce(family_list):
-    error = 0
+def Divorce_before_marriage(family_list):  # Check Divorce before marriage
     for i in family_list:
-        if i[2] == "DIV":
-            dateD = datetime.strptime(i[3], "%Y %b %d")
-        if i[2] == "MARR":
-            dateM = datetime.strptime(i[3], "%Y %b %d")
-        if dateD < dateM:
-            error += 1
-
-    return error
+        if i[4] != "NA":
+            if i[4] < i[3]:
+                print(f"Error: US6- Divorce date {i[4]} is Befor marriage {i[3]} ")
+    return family_list
 
 # User Story 7
 
-def Less_then_150_years_old(family_list): 
-    today = datetime.today()
-    error = 0
-    for i in family_list:
-        if i[2] == "BIRT":
-            dateD = datetime.strptime(i[3], "%Y %b %d")
-            if (dateD - today).year > 150:
-                error += 1
+def Less_then_150_years_old(family_list):  # Check Age more than 150
+    for i in individual_list:
+        calculate_age(i[3], i[4]) > 150:
+            print(f"Error: {calculate_age(i[3], i[4])} is more than 150")
     return error
