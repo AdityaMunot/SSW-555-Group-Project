@@ -68,6 +68,7 @@ def marriage_before_death(family_list, individual_list): #user story 05
                         l.append(j[0])
     return l, " list of families who do not have marriage date before death date of one of the members"
 
+
 def fewer_than_15_siblings(family_list): #user story 15
     
     l=list()
@@ -75,7 +76,6 @@ def fewer_than_15_siblings(family_list): #user story 15
         if len(i[5]) > 15:
             l.append(i[0])
     return l, " list of families have more than 15 siblings"
-
 
 
 def birth_before_death(id, birth, death):
@@ -121,7 +121,29 @@ def marriage_before_death(id, marriage, husbandid, wifeid):
         print("Error: Family", id, "was dead before marriage")
         return "NA"
 
+
+def fewer_than_15_siblings(family_list):  # user story 15
+
+    l = list()
+    for i in family_list:
+        if len(i[5]) > 15:
+            l.append(i[0])
+    return l, " list of families have more than 15 siblings"
+
 # Running User Stories
+
+
+"""
+def marriage_before_death(family_list, individual_list): #user story 05
+    l=list()
+    for i in individual_list:
+        if i[5] is not "NA" and i[4] is not "NA":
+            for j in family_list:
+                if i[5]== j[0] and i[0] == j[1]:
+                    if j[3] > i[4]:
+                        l.append(j[0])
+    return l, " list of families who do not have marriage date before death date of one of the members"
+"""
 
 individual_list = CheckDates(individual_list)  # Running User Story 1
 family_list = CheckDates(family_list)  # Running User Story 1
