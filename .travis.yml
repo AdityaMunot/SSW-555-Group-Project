@@ -2,7 +2,10 @@ language: python
 python:
  - "3.6"
 
-
+# command to install deps
+install:
+  - pip install prettytable
+ 
 # command to run tests
 script:
  - python -m unittest testCase
