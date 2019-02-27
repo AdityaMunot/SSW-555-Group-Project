@@ -119,4 +119,5 @@ def Gedreader(path):  # parsing the gedcom file
 
 
 # Function calling
-individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
+#individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
+individual_list, family_list = Gedreader("/MyFamily.ged")
