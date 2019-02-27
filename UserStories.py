@@ -76,6 +76,51 @@ def fewer_than_15_siblings(family_list): #user story 15
             l.append(i[0])
     return l, " list of families have more than 15 siblings"
 
+
+
+def birth_before_death(id, birth, death):
+    """Check if death before birth"""
+    if birth < death:  # if real person
+        return death
+    else:  # if not a real person put death = NA and add the error
+        print("Error: User", id, "was dead before birth")
+        return "NA"
+
+
+def marraige_before_birth(id, marriage, husbandid, wifeid):
+    """Check if married before birth"""
+    for i in individual_list:
+        if husbandid in i:
+            husbandbirth = i[5]
+        if wifeid in i:
+            wifebirth = i[5]
+    # compare the deaths
+    if husbandbirth < marriage and wifebirth < marriage:
+        # if real family
+        return marriage
+    else:
+        # if not a real family, return marriage as NA
+        print("Error: Family", id, " member was married before being born")
+        return "NA"
+
+
+def marriage_before_death(id, marriage, husbandid, wifeid):
+    """Check if death before marriage"""
+    # find husband death & wife death
+    for i in individual_list:
+        if husbandid in i:
+            husbanddeath = i[4]
+        if wifeid in i:
+            wifedeath = i[4]
+    # compare the deaths
+    if marriage < husbanddeath and marriage < wifedeath:
+        # if real family
+        return marriage
+    else:
+        # if not a real family, return marriage as NA
+        print("Error: Family", id, "was dead before marriage")
+        return "NA"
+
 # Running User Stories
 
 individual_list = CheckDates(individual_list)  # Running User Story 1
@@ -83,3 +128,9 @@ family_list = CheckDates(family_list)  # Running User Story 1
 family_list = Divorce_before_death(family_list)  # Running User Story 6
 family_list = Marriage_before_divorce(family_list)  # Running User Story 4       
 individual_list = lessthen150(individual_list)  # Running User Story 7
+
+
+# Error list for the Weird Values
+
+birth_before_death("@I8@", "1956 FEB 11", "1906 AUG 15")
+marriage_before_death("@F2@", "2010 APR 7", "@I4@", "@I5@")
