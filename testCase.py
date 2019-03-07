@@ -29,13 +29,11 @@ class GedreaderTest(unittest.TestCase):
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
 
-    # testCase for Check Divorce before death
-    def test_Divorce_before_death(self):
+    def test_Divorce_before_death(self):  # testCase for Check Divorce before death
         for i in Checked_Div_bef_dea:
             self.assertEqual(i[4], "NA")
 
-    # testCase for Check Marriage before death
-    def test_Marriage_before_divorce(self):
+    def test_Marriage_before_divorce(self):  # testCase for Check Marriage before death
         for i in Checked_Mar_bef_div:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(
