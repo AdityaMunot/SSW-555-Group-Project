@@ -7,41 +7,45 @@ import unittest
 class GedreaderTest(unittest.TestCase):
     def test_BirthDates(self):  # testCase for Check Birth
         today = datetime.today()
-        for i in individual_list:
-            self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
+        for i in CheckedIndividuals:
+            if i[3] != "NA":
+                self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
 
     def test_DeathDates(self):  # testCase for Check Death
         today = datetime.today()
-        for i in individual_list:
+        for i in CheckedIndividuals:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
 
     def test_MarriedDates(self):  # testCase for Check Married
         today = datetime.today()
-        for i in family_list:
-            self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
+        for i in CheckedFamilylist:
+            if i[3] != "NA":
+                self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
 
     def test_DivorcedDates(self):  # testCase for Check Divorce
         today = datetime.today()
-        for i in family_list:
+        for i in CheckedFamilylist:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
 
     # testCase for Check Divorce before death
     def test_Divorce_before_death(self):
-        for i in family_list:
+        for i in Checked_Div_bef_dea:
             self.assertEqual(i[4], "NA")
 
     # testCase for Check Marriage before death
     def test_Marriage_before_divorce(self):
-        for i in family_list:
+        for i in Checked_Mar_bef_div:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(
                     i[3], "%Y %b %d"), datetime.strptime(i[4], "%Y %b %d"))
 
     def test_lessthen150(self):  # testCase for Check age less than 150
-        for i in individual_list:
-            self.assertLess(calculate_age(i[3], i[4]), 150)
+        for i in checked_Les_Th_150:
+            age = calculate_age(i[3], i[4])
+            if i[3] != "NA" and age != "NA":
+                self.assertLess(age, 150)
 
     # test case for user story 15, fewer than 15 siblings
     def test_siblings_fewer_than_15(self):
