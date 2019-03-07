@@ -70,7 +70,7 @@ def fewer_than_15_siblings(family_list):  # user story 15
     return l, " list of families have more than 15 siblings"
 
 
-def birth_before_death(id, birth, death):
+def birth_before_death(id, birth, death):  # user story 02
     """Check if death before birth"""
     if birth < death:  # if real person
         return death
@@ -79,7 +79,7 @@ def birth_before_death(id, birth, death):
         return "NA"
 
 
-def marraige_before_birth(id, marriage, husbandid, wifeid):
+def birth_before_marriage(id, marriage, husbandid, wifeid):  # user story 03
     """Check if married before birth"""
     for i in individual_list:
         if husbandid in i:
@@ -96,7 +96,7 @@ def marraige_before_birth(id, marriage, husbandid, wifeid):
         return "NA"
 
 
-def marriage_before_death(id, marriage, husbandid, wifeid):
+def marriage_before_death(id, marriage, husbandid, wifeid):  # user story 05
     """Check if death before marriage"""
     # find husband death & wife death
     for i in individual_list:
@@ -112,15 +112,6 @@ def marriage_before_death(id, marriage, husbandid, wifeid):
         # if not a real family, return marriage as NA
         print("Error: Family", id, "was dead before marriage")
         return "NA"
-
-
-def fewer_than_15_siblings(family_list):  # user story 15
-
-    l = list()
-    for i in family_list:
-        if len(i[5]) > 15:
-            l.append(i[0])
-    return l, " list of families have more than 15 siblings"
 
 # Running User Stories
 
