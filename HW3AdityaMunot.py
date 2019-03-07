@@ -30,20 +30,24 @@ def calculate_age(dob, dod):  # Calculate Age using Date of birth & Death
         dod = str(dod)
         if dod == "NA":
             today = date.today()
-            age = today.year - birth_time.year - ((today.month, today.day) < (birth_time.month, birth_time.day))
+            age = today.year - birth_time.year - \
+                ((today.month, today.day) < (birth_time.month, birth_time.day))
             if age > 0:
                 return age
             else:
                 return 'NA'
         else:
             death_time = datetime.strptime(dod, "%Y %b %d")
-            age = death_time.year - birth_time.year - ((death_time.month, death_time.day) < (birth_time.month, birth_time.day))
+            age = death_time.year - birth_time.year - \
+                ((death_time.month, death_time.day) <
+                 (birth_time.month, birth_time.day))
             if age > 0:
                 return age
             else:
                 return 'NA'
     else:
         return "NA"
+
 
 def checkAlive(dod):
     if dod == "NA":
