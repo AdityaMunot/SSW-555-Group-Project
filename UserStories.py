@@ -59,24 +59,27 @@ def lessthen150(individual_list):  # User Story 7
                     f"Error: US7- Individual {i[0]} age is greater than 150 years ")
     return individual_list
 
+def marriage_before_death(family_list, individual_list): #user story 05
 
-def marriage_before_death(family_list, individual_list):  # user story 05
-    l = list()
+    l=list()
     for i in individual_list:
         if i[5] is not "NA" and i[4] is not "NA":
             for j in family_list:
-                if i[5] == j[0] and i[0] == j[1]:
+                if i[5]== j[0] and i[0] == j[1]:
                     if j[3] > i[4]:
+                        print("Error: ", j[0], "family has death before marriage" )
                         l.append(j[0])
     return l, " list of families who do not have marriage date before death date of one of the members"
 
-
-def fewer_than_15_siblings(family_list):  # user story 15
-    l = list()
+def fewer_than_15_siblings(family_list): #user story 15
+    
+    l=list()
     for i in family_list:
-        if len(i[5]) > 15:
+        if len(i[5]) >= 15:
+            print("Error: ", i[0], "family has more than 15 or greater siblings")
             l.append(i[0])
     return l, " list of families have more than 15 siblings"
+
 
 
 def birth_before_death(id, birth, death):  # user story 02
@@ -130,3 +133,6 @@ CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
 Checked_Div_bef_dea = Divorce_before_death(family_list)  # Running User Story 6
 Checked_Mar_bef_div = Marriage_before_divorce(family_list)  # Running User Story 4
 checked_Les_Th_150 = lessthen150(individual_list)  # Running User Story 7
+Checked_marriage_before_death = marriage_before_death(family_list, individual_list) #Running User 05
+Checked_fewer_than_15_siblings = fewer_than_15_siblings(family_list) #Running User Story 15
+
