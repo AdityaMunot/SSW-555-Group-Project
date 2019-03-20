@@ -1,24 +1,19 @@
 from HW3AdityaMunot import *
 
 
-def CheckDates(Tlist):  # User Story 1
-    # Check dates in gedcom file are before current date
+def CheckDates(Tlist):  # Check dates in gedcom file are before current date
     today = datetime.today()
     for i in Tlist:
         if i[3] != "NA":
             tdate = datetime.strptime(i[3], "%Y %b %d")
             if tdate > today:
                 i[3] = "NA"
-                print(
-                    f"Error: US1- {i[0]} date {i[3]} is after current Date {today} ")
-        else:
-            print(f"Error: US1- {i[0]} date is not mentioned ")
+                print(f"Error: US1- {i[0]} date {i[3]} is after current Date {today} ")
         if i[4] != "NA":
-            tdate = datetime.strptime(i[4], "%Y %b %d")
+            tdate = datetime.strptime(i[4], "%Y %b %d") 
             if tdate > today:
                 i[4] = "NA"
-                print(
-                    f"Error: US1- {i[0]} date {i[4]} is after current Date {today} ")
+                print(f"Error: US1- {i[0]} date {i[4]} is after current Date {today} ")
     return Tlist
 
 
@@ -59,7 +54,8 @@ def lessthen150(individual_list):  # User Story 7
                     f"Error: US7- Individual {i[0]} age is greater than 150 years ")
     return individual_list
 
-def marriage_before_death(family_list, individual_list): #user story 05
+
+def marriage_before_death(family_list, individual_list):  # user story 05
 
     l=list()
     for i in individual_list:
@@ -71,8 +67,9 @@ def marriage_before_death(family_list, individual_list): #user story 05
                         l.append(j[0])
     return l, " list of families who do not have marriage date before death date of one of the members"
 
-def fewer_than_15_siblings(family_list): #user story 15
-    
+
+def fewer_than_15_siblings(family_list):  # user story 15
+
     l=list()
     for i in family_list:
         if len(i[5]) >= 15:
@@ -81,9 +78,7 @@ def fewer_than_15_siblings(family_list): #user story 15
     return l, " list of families have more than 15 siblings"
 
 
-
 def birth_before_death(id, birth, death):  # user story 02
-    """Check if death before birth"""
     if birth < death:  # if real person
         return death
     else:  # if not a real person put death = NA and add the error
@@ -92,7 +87,6 @@ def birth_before_death(id, birth, death):  # user story 02
 
 
 def birth_before_marriage(id, marriage, husbandid, wifeid):  # user story 03
-    """Check if married before birth"""
     for i in individual_list:
         if husbandid in i:
             husbandbirth = i[5]
@@ -107,24 +101,6 @@ def birth_before_marriage(id, marriage, husbandid, wifeid):  # user story 03
         print("Error: Family", id, " member was married before being born")
         return "NA"
 
-
-def marriage_before_death(id, marriage, husbandid, wifeid):  # user story 05
-    """Check if death before marriage"""
-    # find husband death & wife death
-    for i in individual_list:
-        if husbandid in i:
-            husbanddeath = i[4]
-        if wifeid in i:
-            wifedeath = i[4]
-    # compare the deaths
-    if marriage < husbanddeath and marriage < wifedeath:
-        # if real family
-        return marriage
-    else:
-        # if not a real family, return marriage as NA
-        print("Error: Family", id, "was dead before marriage")
-        return "NA"
-
 # Running User Stories
 
 
@@ -133,6 +109,5 @@ CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
 Checked_Div_bef_dea = Divorce_before_death(family_list)  # Running User Story 6
 Checked_Mar_bef_div = Marriage_before_divorce(family_list)  # Running User Story 4
 checked_Les_Th_150 = lessthen150(individual_list)  # Running User Story 7
-Checked_marriage_before_death = marriage_before_death(family_list, individual_list) #Running User 05
-Checked_fewer_than_15_siblings = fewer_than_15_siblings(family_list) #Running User Story 15
-
+Checked_marriage_before_death = marriage_before_death(family_list, individual_list)  # Running User 05
+Checked_fewer_than_15_siblings = fewer_than_15_siblings(family_list)  # Running User Story 15
