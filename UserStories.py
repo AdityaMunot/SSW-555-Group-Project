@@ -81,7 +81,7 @@ def fewer_than_15_siblings(family_list):  # user story 15
             print("Error: ", i[0],
                   "family has more than 15 or greater siblings")
             l.append(i[0])
-    return l, " list of families have more than 15 siblings"
+    return l
 
 
 def birth_before_death(individual_list):

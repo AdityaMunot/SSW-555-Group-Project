@@ -48,13 +48,10 @@ class GedreaderTest(unittest.TestCase):
                 self.assertLess(age, 150)
 
     # test case for user story 15, fewer than 15 siblings
-    """def test_siblings_fewer_than_15(self):
-        self.assertEqual(fewer_than_15_siblings(family_list),
-                         ([], " list of families have more than 15 siblings"))
-        self.assertNotEqual(fewer_than_15_siblings(family_list), 1)
-        self.assertTrue(fewer_than_15_siblings(family_list))
-        self.assertIsNotNone(fewer_than_15_siblings(family_list))
-        self.assertIsNot(fewer_than_15_siblings(family_list), "")"""
+    def test_siblings_fewer_than_15(self):
+        temp = ['@F1@']
+        if Checked_fewer_than_15_siblings:
+                self.assertEqual(Checked_fewer_than_15_siblings, temp)
 
     class TestBirth(unittest.TestCase):
         def test_wrong(self):
