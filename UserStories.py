@@ -1,8 +1,7 @@
 from HW3AdityaMunot import *
 
 
-def CheckDates(Tlist):  # User Story 1
-    # Check dates in gedcom file are before current date
+def CheckDates(Tlist):  # Check dates in gedcom file are before current date
     today = datetime.today()
     for i in Tlist:
         if i[3] != "NA":
@@ -12,7 +11,7 @@ def CheckDates(Tlist):  # User Story 1
                 print(
                     f"Error: US1- {i[0]} date {i[3]} is after current Date {today} ")
         else:
-            print(f"Error: US1- {i[0]} date is not mentioned ")
+            print(f"Error: US1- {i[0]} date is not mentioned")
         if i[4] != "NA":
             tdate = datetime.strptime(i[4], "%Y %b %d")
             if tdate > today:
@@ -60,6 +59,20 @@ def lessthen150(individual_list):  # User Story 7
     return individual_list
 
 
+def marriage_before_death(family_list, individual_list):  # user story 05
+
+    l = list()
+    for i in individual_list:
+        if i[5] is not "NA" and i[4] is not "NA":
+            for j in family_list:
+                if i[5] == j[0] and i[0] == j[1]:
+                    if j[3] > i[4]:
+                        print("Error: ", j[0],
+                              "family has death before marriage")
+                        l.append(j[0])
+    return l, " list of families who do not have marriage date before death date of one of the members"
+
+
 def fewer_than_15_siblings(family_list):  # user story 15
 
     l = list()
@@ -96,29 +109,9 @@ def birth_before_marriage(individual_list, family_list):  # user story 03
                 if (i[0] == j[1] or i[0] == j[2]) and j[3] != "NA":
                     marriage = datetime.strptime(j[3], "%Y %b %d")
                     if birth > marriage:
-                        val = ("Error: User", ind_id,
-                               "was married before birth")
+                        val = ("Error: User", ind_id, "was dead before birth")
                         l.append(val)
     return l
-
-
-def marriage_before_death(individual_list, family_list):
-    """Check if death before marriage"""
-    # find husband death & wife death
-    l = []
-    for i in individual_list:
-        if i[4] != "NA":
-            death = datetime.strptime(i[4], "%Y %b %d")
-            ind_id = i[0]
-            for j in family_list:
-                if (i[0] == j[1] or i[0] == j[2]) and j[3] != "NA":
-                    marriage = datetime.strptime(j[3], "%Y %b %d")
-                    if death < marriage:
-                        val = ("Error: User", ind_id,
-                               "was marriage before death")
-                        l.append(val)
-    return l
-
 
 # Running User Stories
 
@@ -133,6 +126,6 @@ Checked_marriage_before_death = marriage_before_death(
     family_list, individual_list)  # Running User 05
 Checked_fewer_than_15_siblings = fewer_than_15_siblings(
     family_list)  # Running User Story 15
+
 print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
-print(marriage_before_death(individual_list, family_list))
