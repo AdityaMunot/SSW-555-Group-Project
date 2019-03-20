@@ -9,6 +9,8 @@ def CheckDates(Tlist):  # Check dates in gedcom file are before current date
             if tdate > today:
                 i[3] = "NA"
                 print(f"Error: US1- {i[0]} date {i[3]} is after current Date {today} ")
+        else:
+            print(f"Error: US1- {i[0]} date is not mentioned")
         if i[4] != "NA":
             tdate = datetime.strptime(i[4], "%Y %b %d") 
             if tdate > today:
