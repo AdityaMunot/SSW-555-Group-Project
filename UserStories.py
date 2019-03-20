@@ -105,16 +105,20 @@ def birth_before_marriage(individual_list, family_list):  # user story 03
         if i[3] != "NA":
             birth = datetime.strptime(i[3], "%Y %b %d")
             ind_id = i[0]
+            fam_id = i[5]
             for j in family_list:
                 if (i[0] == j[1] or i[0] == j[2]) and j[3] != "NA":
                     marriage = datetime.strptime(j[3], "%Y %b %d")
                     if birth > marriage:
-                        val = ("Error: User", ind_id, "was dead before birth")
+                        val = ("Error: User", fam_id,
+                               "was born before marraige")
                         l.append(val)
     return l
 
-# Running User Stories
 
+# Running User Stories
+print(birth_before_death(individual_list))
+print(birth_before_marriage(individual_list, family_list))
 
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
 CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
@@ -126,6 +130,3 @@ Checked_marriage_before_death = marriage_before_death(
     family_list, individual_list)  # Running User 05
 Checked_fewer_than_15_siblings = fewer_than_15_siblings(
     family_list)  # Running User Story 15
-
-print(birth_before_death(individual_list))
-print(birth_before_marriage(individual_list, family_list))
