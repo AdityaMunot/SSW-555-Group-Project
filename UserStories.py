@@ -168,7 +168,7 @@ def parents_birth_before_death():  # birth before death of parents
                 try:
                     if f > dom and f > dodd:
                         l.append(
-                            "Error", f, "children born after parents death")
+                            ("Error", f, "children born after parents death"))
                 except UnboundLocalError:
                     continue
     return l
