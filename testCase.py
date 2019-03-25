@@ -51,7 +51,15 @@ class GedreaderTest(unittest.TestCase):
     def test_siblings_fewer_than_15(self):
         temp = ['@F1@']
         if Checked_fewer_than_15_siblings:
-                self.assertEqual(Checked_fewer_than_15_siblings, temp)
+            self.assertEqual(Checked_fewer_than_15_siblings, temp)
+
+    def test_parents_birth_bfr_death(self):
+        self.assertEqual(list(parents_birth_before_death()), [])
+
+    def test_marr_before_14(self):
+        a = [('Error,', '@F1@', 'married when less than 14'),
+             ('Error,', '@F4@', 'married when less than 14')]
+        self.assertEqual(list(marriage_under_age_14()), a)
 
     class TestBirth(unittest.TestCase):
         def test_wrong(self):

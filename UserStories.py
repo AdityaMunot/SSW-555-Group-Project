@@ -116,9 +116,69 @@ def birth_before_marriage(individual_list, family_list):  # user story 03
     return l
 
 
+def marriage_under_age_14():
+    l = []
+    for k in family_list:
+        id = k[0]
+        marriage = k[3]
+        husbandid = k[1]
+        wifeid = k[2]
+        for i in individual_list:
+            if husbandid in i and husbandid != "NA":
+                husbandbirth = i[3][:4]
+                try:
+                    legal_husband_age = int(husbandbirth)+14
+                except ValueError:
+                    continue
+            if wifeid in i:
+                wifebirth = i[3][:4]
+                try:
+                    legal_wife_age = int(wifebirth)+14
+                except ValueError:
+                    continue
+        for i in family_list:
+            try:
+                if legal_husband_age > int(marriage[:4]) or legal_wife_age > int(marriage[:4]):
+                    l.append(("Error,", id, "married when less than 14"))
+            except ValueError:
+                continue
+    return (dict.fromkeys(l))
+
+
+def parents_birth_before_death():  # birth before death of parents
+    l = []
+    for i in family_list:
+        children = i[5]
+        children_dob = []
+        if len(children) > 0:
+            dad_id = i[1]
+            mom_id = i[2]
+            for j in individual_list:
+                if j[0] in children:
+                    if j[3] != "NA":
+                        children_dob.append(
+                            datetime.strptime(j[3], "%Y %b %d"))
+                if j[0] == mom_id:
+                    if j[4] != "NA":
+                        dom = datetime.strptime(j[4], "%Y %b %d")
+                elif j[0] == dad_id:
+                    if j[4] != "NA":
+                        dodd = datetime.strptime(j[4], "%Y %b %d")
+            for f in children_dob:
+                try:
+                    if f > dom and f > dodd:
+                        l.append(
+                            "Error", f, "children born after parents death")
+                except UnboundLocalError:
+                    continue
+    return l
+
+
 # Running User Stories
 print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
+print(list(marriage_under_age_14()))
+print(list(parents_birth_before_death()))
 
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
 CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
