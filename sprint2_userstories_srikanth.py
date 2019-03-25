@@ -1,7 +1,7 @@
 '''user stories of sprint 2 
     author: srikanth'''
 
-from gedcom_parser import *
+from HW3AdityaMunot import *
 
 
 def correct_gender_for_role(family_list, individual_list): #user story 21
