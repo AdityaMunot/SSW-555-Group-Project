@@ -61,6 +61,14 @@ class GedreaderTest(unittest.TestCase):
              ('Error,', '@F4@', 'married when less than 14')]
         self.assertEqual(list(marriage_under_age_14()), a)
 
+    def test_no_bigamy(self):
+        error = 0
+        self.assertEqual(checked_no_bigamy, error)
+
+    def test_parents_not_too_old(self):
+        error = 3
+        self.assertEqual(checked_parents_not_too_old, error)
+
     class TestBirth(unittest.TestCase):
         def test_wrong(self):
             """for death before birth"""

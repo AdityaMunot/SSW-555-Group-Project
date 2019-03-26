@@ -174,6 +174,62 @@ def parents_birth_before_death():  # birth before death of parents
     return l
 
 
+def no_bigamy(family_list, individual_list):
+    error = 0
+    for i in family_list:
+        fam = i[0]
+        spouse1 = i[1]
+        spouse2 = i[2]
+        div = i[4]
+        for j in family_list:
+            if j[0] != fam:
+                if j[1] == spouse1:
+                    if div == "NA":
+                        for k in individual_list:
+                            if k[0] == spouse2 and k[4] != "NA" and k[4] > j[3]:
+                                    print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                    elif div < j[3]:
+                        print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                elif j[2] == spouse2:
+                    if div == "NA":
+                        for k in individual_list:
+                            if k[0] == spouse1 and k[4] != "NA" and k[4] > j[3]:
+                                    print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                    elif div < j[3]:
+                        print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+    return error
+
+
+def get_age_with_id(id, individual_list):  # created for User Stories 12
+    if id != "NA":
+        for i in individual_list:
+            if i[0] == id:
+                return calculate_age(i[3], i[4])
+    else:
+        return 'NA'
+
+
+def parents_not_too_old(family_list, individual_list):
+    error = 0
+    for i in family_list:
+        if len(i[5]) != 0:
+            husband_age = get_age_with_id(i[1], individual_list)
+            wife_age = get_age_with_id(i[2], individual_list)
+            child_age = get_age_with_id(i[5][-1], individual_list)
+            if husband_age == "NA"or wife_age == "NA"or child_age == "NA":
+                print(f"Error: US 12 - {i[0]} family is missing date")
+                error += 1
+                continue
+            elif (husband_age-child_age) > 80 or (wife_age-child_age) > 60:
+                print(f"Error: US 12 - {i[0]} family is parents are too old for kids")
+                error += 1
+    return error
+
+
+checked_no_bigamy = no_bigamy(family_list, individual_list)
+checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)
+
+
 # Running User Stories
 print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
