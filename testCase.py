@@ -68,6 +68,21 @@ class GedreaderTest(unittest.TestCase):
     def test_parents_not_too_old(self):
         error = 3
         self.assertEqual(checked_parents_not_too_old, error)
+        
+        
+    def test_correct_gender_for_role(self): #test case for user story 21
+        self.assertEqual(correct_gender_for_role(family_list, individual_list),("all gender roles in the families are correct"))
+        self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
+        self.assertTrue(correct_gender_for_role(family_list, individual_list))
+        self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
+        self.assertIsNot(correct_gender_for_role(family_list, individual_list), '')
+    
+    def test_unique_ids(self):  #test case for user story 22
+        self.assertEqual(unique_ids(family_list, individual_list), ("all IDs unique in Family and Individual list"))
+        self.assertNotEqual(unique_ids(family_list, individual_list), 1)
+        self.assertTrue(unique_ids(family_list, individual_list))
+        self.assertIsNotNone(unique_ids(family_list, individual_list))
+        self.assertIsNot(unique_ids(family_list, individual_list), "")
 
     class TestBirth(unittest.TestCase):
         def test_wrong(self):
