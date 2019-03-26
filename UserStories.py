@@ -174,7 +174,7 @@ def parents_birth_before_death():  # birth before death of parents
     return l
 
 
-def no_bigamy(family_list, individual_list):
+def no_bigamy(family_list, individual_list):  # user story 11
     error = 0
     for i in family_list:
         fam = i[0]
@@ -197,6 +197,8 @@ def no_bigamy(family_list, individual_list):
                                     print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
                     elif div < j[3]:
                         print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+    if error == 0:
+        print("US 11: There is no bigamy in the Family")
     return error
 
 
@@ -209,7 +211,7 @@ def get_age_with_id(id, individual_list):  # created for User Stories 12
         return 'NA'
 
 
-def parents_not_too_old(family_list, individual_list):
+def parents_not_too_old(family_list, individual_list):  # User Story 12
     error = 0
     for i in family_list:
         if len(i[5]) != 0:
@@ -223,9 +225,12 @@ def parents_not_too_old(family_list, individual_list):
             elif (husband_age-child_age) > 80 or (wife_age-child_age) > 60:
                 print(f"Error: US 12 - {i[0]} family is parents are too old for kids")
                 error += 1
+    if error == 0:
+        print("US 12: all parents are in appropriate age for children")
     return error
 
-def correct_gender_for_role(family_list, individual_list): #user story 21
+
+def correct_gender_for_role(family_list, individual_list):  # user story 21
     for i in family_list:
         for j in individual_list:
             if i[1] == j[0]:
@@ -237,10 +242,9 @@ def correct_gender_for_role(family_list, individual_list): #user story 21
     return "all gender roles in the families are correct" 
 
 
-
-def unique_ids(family_list, individual_list): #user story 22
-    uid=list()
-    fid=list()
+def unique_ids(family_list, individual_list):  # user story 22
+    uid = list()
+    fid = list()
 
     for i in family_list:
         if i[0] not in fid:
@@ -260,8 +264,8 @@ def unique_ids(family_list, individual_list): #user story 22
 
 
 
-checked_no_bigamy = no_bigamy(family_list, individual_list)
-checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)
+checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
+checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
 
 
 # Running User Stories
