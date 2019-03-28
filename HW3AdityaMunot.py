@@ -25,14 +25,28 @@ def Getname(individualList, IDnumber):  # Name of Individual
 
 
 def calculate_age(dob, dod):  # Calculate Age using Date of birth & Death
-    birth_time = datetime.strptime(dob, "%Y %b %d")
-    dod = str(dod)
-    if dod == "NA":
-        today = date.today()
-        return today.year - birth_time.year - ((today.month, today.day) < (birth_time.month, birth_time.day))
+    if dob != "NA":
+        birth_time = datetime.strptime(dob, "%Y %b %d")
+        dod = str(dod)
+        if dod == "NA":
+            today = date.today()
+            age = today.year - birth_time.year - \
+                ((today.month, today.day) < (birth_time.month, birth_time.day))
+            if age > 0:
+                return age
+            else:
+                return 'NA'
+        else:
+            death_time = datetime.strptime(dod, "%Y %b %d")
+            age = death_time.year - birth_time.year - \
+                ((death_time.month, death_time.day) <
+                 (birth_time.month, birth_time.day))
+            if age > 0:
+                return age
+            else:
+                return 'NA'
     else:
-        death_time = datetime.strptime(dod, "%Y %b %d")
-        return death_time.year - birth_time.year - ((death_time.month, death_time.day) < (birth_time.month, birth_time.day))
+        return "NA"
 
 
 def checkAlive(dod):
@@ -119,5 +133,5 @@ def Gedreader(path):  # parsing the gedcom file
 
 
 # Function calling
-# individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
-individual_list, family_list = Gedreader("MyFamily.ged")
+#individual_list, family_list = Gedreader(input("Enter GedCom File Location: "))
+individual_list, family_list = Gedreader("My-Family-25-Mar-2019-960.ged")
