@@ -13,7 +13,7 @@ class GedreaderTest(unittest.TestCase):
 
     def test_DeathDates(self):  # testCase for Check Death
         today = datetime.today()
-        for i in individual_list:
+        for i in CheckedIndividuals:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
 
@@ -25,18 +25,18 @@ class GedreaderTest(unittest.TestCase):
 
     def test_DivorcedDates(self):  # testCase for Check Divorce
         today = datetime.today()
-        for i in family_list:
+        for i in CheckedFamilylist:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
 
     # testCase for Check Divorce before death
     def test_Divorce_before_death(self):
-        for i in family_list:
+        for i in Checked_Div_bef_dea:
             self.assertEqual(i[4], "NA")
 
     # testCase for Check Marriage before death
     def test_Marriage_before_divorce(self):
-        for i in family_list:
+        for i in Checked_Mar_bef_div:
             if i[4] != "NA":
                 self.assertLess(datetime.strptime(
                     i[3], "%Y %b %d"), datetime.strptime(i[4], "%Y %b %d"))
@@ -69,6 +69,7 @@ class GedreaderTest(unittest.TestCase):
         error = 4
         self.assertEqual(checked_parents_not_too_old, error)
         
+        
     def test_correct_gender_for_role(self): #test case for user story 21
         self.assertEqual(correct_gender_for_role(family_list, individual_list),('invalid gender in family ', '@I1@'))
         self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
@@ -82,64 +83,18 @@ class GedreaderTest(unittest.TestCase):
         self.assertTrue(unique_ids(family_list, individual_list))
         self.assertIsNotNone(unique_ids(family_list, individual_list))
         self.assertIsNot(unique_ids(family_list, individual_list), "")
-            
-class TestBirth(unittest.TestCase):
-    def test_normal(self):
-        # havent added Errors like unbound and type cos we will be adding them in the future updates
-        """test for normal working and nothing if wrong"""
-        self.assertEqual(birth_before_death(
-            "@I8@", "1906 AUG 15", "1956 FEB 11"), "1956 FEB 11")
-        self.assertNotEqual(birth_before_death(
-            "@I8@", "1956 FEB 11", "1906 AUG 15"), "1906 AUG 15")
 
-    def test_wrong(self):
-        """for death before birth"""
-        self.assertEqual(birth_before_death(
-            "@I8@", "1956 FEB 11", "1906 AUG 15"), "NA")
-        self.assertNotEqual(birth_before_death(
-            "@I8@", "1906 AUG 15", "1956 FEB 11"), "NA")
-        self.assertTrue(birth_before_death(
-            "@I8@", "1956 FEB 11", "1906 AUG 15") == "NA")
-        self.assertFalse(birth_before_death(
-            "@I8@", "1906 AUG 15", "1956 FEB 11") == "NA")
+    class TestBirth(unittest.TestCase):
+        def test_wrong(self):
+            """for death before birth"""
+            self.assertEqual(birth_before_death(individual_list), [('Error: User', '@F4@', 'was dead before birth'),
+                                                                   ('Error: User', '@F1@', 'was dead before birth')])
 
-
-class TestMarriage(unittest.TestCase):
-    def test_normal(self):
-        # havent added Errors like unbound and type cos we will be adding them in the future updates
-        """test for normal working and nothing if wrong"""
-        self.assertEqual(marriage_before_death(
-            "@F2@", "1993 APR 7", "@I4@", "@I5@"), "1993 APR 7")
-        self.assertNotEqual(marriage_before_death(
-            "@F2@", "2010 APR 7", "@I4@", "@I5@"), "2010 APR 7")
-
-    def test_wrong(self):
-        """for death before marriage"""
-        self.assertEqual(marriage_before_death(
-            "@F2@", "2010 APR 7", "@I4@", "@I5@"), "NA")
-        self.assertNotEqual(marriage_before_death(
-            "@F2@", "1993 APR 7", "@I4@", "@I5@"), "NA")
-        self.assertFalse(marriage_before_death(
-            "@F2@", "1993 APR 7", "@I4@", "@I5@") == "NA")
-
-
-class TestBirth(unittest.TestCase):
-    def test_normal(self):
-        # havent added Errors like unbound and type cos we will be adding them in the future updates
-        """test for normal working and nothing if wrong"""
-        self.assertEqual(marraige_before_birth(
-            "@F2@", "1993 APR 7", "@I4@", "@I5@"), "NA")
-        self.assertNotEqual(marraige_before_birth(
-            "@F2@", "2010 APR 7", "@I4@", "@I5@"), "2010 APR 7")
-
-    def test_wrong(self):
-        """for death before marriage"""
-        self.assertEqual(marraige_before_birth(
-            "@F2@", "2010 APR 7", "@I4@", "@I5@"), "NA")
-        self.assertNotEqual(marraige_before_birth(
-            "@F2@", "1993 APR 7", "@I4@", "@I5@"), "1993 APR 7")
-        self.assertTrue(marraige_before_birth(
-            "@F2@", "1993 APR 7", "@I4@", "@I5@") == "NA")
+    class TestMarriage(unittest.TestCase):
+        def test_normal(self):
+            # havent added Errors like unbound and type cos we will be adding them in the future updates
+            self.assertEqual((birth_before_marriage(individual_list, family_list)), [
+                             ('Error: User', '@I5@', 'was dead before birth')])
         
 #For User Story 23 8
 class TestBirthDay(unittest.TestCase):
