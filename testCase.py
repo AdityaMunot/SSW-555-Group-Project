@@ -66,12 +66,12 @@ class GedreaderTest(unittest.TestCase):
         self.assertEqual(checked_no_bigamy, error)
 
     def test_parents_not_too_old(self):
-        error = 3
+        error = 4
         self.assertEqual(checked_parents_not_too_old, error)
         
         
     def test_correct_gender_for_role(self): #test case for user story 21
-        self.assertEqual(correct_gender_for_role(family_list, individual_list),("all gender roles in the families are correct"))
+        self.assertEqual(correct_gender_for_role(family_list, individual_list),('invalid gender in family ', '@I1@'))
         self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
         self.assertTrue(correct_gender_for_role(family_list, individual_list))
         self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
