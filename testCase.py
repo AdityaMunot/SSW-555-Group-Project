@@ -99,10 +99,10 @@ class GedreaderTest(unittest.TestCase):
 #For User Story 23 8
 class TestBirthDay(unittest.TestCase):
     def test_unique_name_and_birthday(self):
-        self.assertEqual(Birth_before_mariage_of_parents(individual_list), "")
+        self.assertEqual(Unique_name_and_birthday(individual_list), "")
 
     def test_birth_before_mariage_of_parents(self):
-        self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "")
+        self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: Krappa Chino Birth at 2018 SEP 7 have been duplicated ")
 
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)
