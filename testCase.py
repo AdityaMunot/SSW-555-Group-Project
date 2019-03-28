@@ -7,8 +7,9 @@ import unittest
 class GedreaderTest(unittest.TestCase):
     def test_BirthDates(self):  # testCase for Check Birth
         today = datetime.today()
-        for i in individual_list:
-            self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
+        for i in CheckedIndividuals:
+            if i[3] != "NA":
+                self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
 
     def test_DeathDates(self):  # testCase for Check Death
         today = datetime.today()
@@ -18,8 +19,9 @@ class GedreaderTest(unittest.TestCase):
 
     def test_MarriedDates(self):  # testCase for Check Married
         today = datetime.today()
-        for i in family_list:
-            self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
+        for i in CheckedFamilylist:
+            if i[3] != "NA":
+                self.assertLess(datetime.strptime(i[3], "%Y %b %d"), today)
 
     def test_DivorcedDates(self):  # testCase for Check Divorce
         today = datetime.today()
@@ -40,19 +42,47 @@ class GedreaderTest(unittest.TestCase):
                     i[3], "%Y %b %d"), datetime.strptime(i[4], "%Y %b %d"))
 
     def test_lessthen150(self):  # testCase for Check age less than 150
-        for i in individual_list:
-            self.assertLess(calculate_age(i[3], i[4]), 150)
+        for i in checked_Les_Th_150:
+            age = calculate_age(i[3], i[4])
+            if i[3] != "NA" and age != "NA":
+                self.assertLess(age, 150)
 
     # test case for user story 15, fewer than 15 siblings
     def test_siblings_fewer_than_15(self):
-        self.assertEqual(fewer_than_15_siblings(family_list),
-                         ([], " list of families have more than 15 siblings"))
-        self.assertNotEqual(fewer_than_15_siblings(family_list), 1)
-        self.assertTrue(fewer_than_15_siblings(family_list))
-        self.assertIsNotNone(fewer_than_15_siblings(family_list))
-        self.assertIsNot(fewer_than_15_siblings(family_list), "")
+        temp = ['@F1@']
+        if Checked_fewer_than_15_siblings:
+            self.assertEqual(Checked_fewer_than_15_siblings, temp)
 
+    def test_parents_birth_bfr_death(self):
+        self.assertEqual(list(parents_birth_before_death()), [])
 
+    def test_marr_before_14(self):
+        a = [('Error,', '@F1@', 'married when less than 14'),
+             ('Error,', '@F4@', 'married when less than 14')]
+        self.assertEqual(list(marriage_under_age_14()), a)
+
+    def test_no_bigamy(self):
+        error = 0
+        self.assertEqual(checked_no_bigamy, error)
+
+    def test_parents_not_too_old(self):
+        error = 4
+        self.assertEqual(checked_parents_not_too_old, error)
+        
+    def test_correct_gender_for_role(self): #test case for user story 21
+        self.assertEqual(correct_gender_for_role(family_list, individual_list),('invalid gender in family ', '@I1@'))
+        self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
+        self.assertTrue(correct_gender_for_role(family_list, individual_list))
+        self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
+        self.assertIsNot(correct_gender_for_role(family_list, individual_list), '')
+    
+    def test_unique_ids(self):  #test case for user story 22
+        self.assertEqual(unique_ids(family_list, individual_list), ("all IDs unique in Family and Individual list"))
+        self.assertNotEqual(unique_ids(family_list, individual_list), 1)
+        self.assertTrue(unique_ids(family_list, individual_list))
+        self.assertIsNotNone(unique_ids(family_list, individual_list))
+        self.assertIsNot(unique_ids(family_list, individual_list), "")
+            
 class TestBirth(unittest.TestCase):
     def test_normal(self):
         # havent added Errors like unbound and type cos we will be adding them in the future updates
