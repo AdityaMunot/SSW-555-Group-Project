@@ -168,7 +168,7 @@ def parents_birth_before_death():  # birth before death of parents
                 try:
                     if f > dom and f > dodd:
                         l.append(
-                            ("Error", f, "children born after parents death"))
+                            ("Error", i[0], "children born after parents death"))
                 except UnboundLocalError:
                     continue
     return l
@@ -239,7 +239,7 @@ def correct_gender_for_role(family_list, individual_list):  # user story 21
             if i[2] == j[0]:
                 if j[2] != "F":
                     return("invalid gender in family ", i[1])
-    return "all gender roles in the families are correct" 
+    return "all gender roles in the families are correct"
 
 
 def unique_ids(family_list, individual_list):  # user story 22
@@ -258,38 +258,38 @@ def unique_ids(family_list, individual_list):  # user story 22
         else:
             return i[0], " not unique in individual list"
 
-    return "all IDs unique in Family and Individual list" 
+    return "all IDs unique in Family and Individual list"
 
 
 #User Story 23
 def Unique_name_and_birthday(individual_list):
-	str = ''
-	for i in individual_list:
-		for j in individual_list:
-			if i[0] != j[0]:
-				if i[1]== j[1] and i[3]== j[3]:
-					str = f"Error: {i[1]} Birth at {i[3]} have been duplicated "
-					print(str)
-	return str
+    str = ''
+    for i in individual_list:
+        for j in individual_list:
+            if i[0] != j[0]:
+                if i[1]== j[1] and i[3]== j[3]:
+                    str = f"Error: {i[1]} Birth at {i[3]} have been duplicated "
+                    print(str)
+    return str
 
 #User Story 8
 def Birth_before_mariage_of_parents(individual_list, family_list):
-	str = ''
-	for family in family_list:
-		for child in family[5]:
-			for i in individual_list:
-				if child == i[0]:
-					if i[3] < family[3]:
-						str = f"Error: {i[1]} Birth at {i[3]} have been duplicated "
-						print(str)
-	return str
+    str = ''
+    for family in family_list:
+        for child in family[5]:
+            for i in individual_list:
+                if child == i[0]:
+                    if i[3] < family[3]:
+                        str = f"Error: {i[1]} Birth at {i[3]} have been duplicated "
+                        print(str)
+    return str
 
 
 checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
 checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
 
 
-# Running User Stories
+#Running User Stories
 print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
 print(list(marriage_under_age_14()))
