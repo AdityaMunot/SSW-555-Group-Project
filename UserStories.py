@@ -284,6 +284,41 @@ def Birth_before_mariage_of_parents(individual_list, family_list):
                         print(str)
     return str
 
+def sibling_should_not_mawrry():
+    """US 18 Siblings should not marry"""
+    l = []
+    for i in family_list:
+        husband = i[1]
+        wife = i[2]
+        for j in family_list:
+            if len(j[5]) > 1:
+                if husband in j[5] and wife in j[5]:
+                    l.append(("Error both are sibblings but married", husband, wife))
+    return l
+
+def first_cousin_should_not_marry():
+    """First cousin should not marry US 19"""
+    l = []
+    hfather = None
+    wfather = None
+    hmother = None
+    wmother = None
+    for i in family_list:
+        chhusband = i[1]
+        chwife = i[2]
+        if chwife != "NA" and chhusband != "NA":
+            for j in family_list:
+                if len(j[5])>1:
+                    if chhusband in j[5]:
+                        hfather = j[1]
+                        hmother = j[2]
+                    if chwife in j[5]:
+                        wfather = j[1]
+                        wmother = j[2]
+        for k in family_list:
+            if ((wfather and hmother) in k[5]) or ((hfather and wmother) in k[5]):
+                l.append(("Error US 19 first cousins are getting married", k[0]))
+    return l
 
 checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
 checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
@@ -296,7 +331,8 @@ print(list(marriage_under_age_14()))
 print(list(parents_birth_before_death()))
 print(correct_gender_for_role(family_list, individual_list))
 print(unique_ids(family_list,individual_list))
-
+print(list(sibling_should_not_mawrry()))
+print(list(first_cousin_should_not_marry()))
 
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
 CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
