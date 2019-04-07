@@ -99,5 +99,15 @@ class TestBirthDay(unittest.TestCase):
 	def test_birth_before_mariage_of_parents(self):
 		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: Krappa Chino Birth at 2018 SEP 7 have been duplicated ")
 
+"""
+	def test_sibling_should_not_mawrry(self):
+		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
+
+	def test_first_cousin_should_not_marry(self):
+		self.assertEqual(first_cousin_should_not_marry(),[('Error US 19 first cousins are getting married', '@F3@')])
+
+"""
+
+
 if __name__ == '__main__':
 	unittest.main(exit=False, verbosity=2)
