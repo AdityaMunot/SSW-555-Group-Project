@@ -391,6 +391,31 @@ def Multiple_birth():
     return error
 
 
+def male_last_names(individual_list, family_list): #user story 16
+    for i in family_list:
+        father_name= Getname(individual_list, i[1]).split()
+        father_last_name=father_name[-1]
+        
+        for j in individual_list:
+            if j[0] in i[5]:
+                if j[2]=="M":
+                    m_child_name=j[1].split()
+                    if m_child_name[-1]  != father_last_name:
+                        return ("error in family",i[0]," male child last name not the same as fathers last name" )
+
+    return("all male child last names in the family are the same.")
+
+
+def no_marriage_to_children(individual_list , family_list): #User story 17
+    for i in family_list:
+        for c in i[5]:
+            for j in individual_list:
+                if j[0]==c:
+                    if (j[5]== i[1] ) or ( j[5] == i[2]):
+                        return("ERROR in family ",i[0], " child is married to parent")
+    
+    return("No individuals in family are married to parents.")
+
 
 
 #Running User Stories
@@ -418,3 +443,5 @@ checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Stor
 checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
 checked_Sibling_spacing = Siblings_spacing() # running User Story 13
 checked_Multiple_birth = Multiple_birth() # running User Story 14
+print(male_last_names(individual_list,family_list)) #running user story 16
+print(no_marriage_to_children(individual_list,family_list))# running user story 17
