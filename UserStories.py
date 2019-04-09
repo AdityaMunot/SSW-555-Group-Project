@@ -331,7 +331,7 @@ def Aunts_and_uncles(individual_list, family_list):
 					if ((family[1] == individual_1 and family[2] == individual_2) or(family[2] == individual_1 and family[1] == individual_2)):
 						str = f"Error: Aunts and uncles shouldn't marry their nieces or nephews {individual_1} and {individual_2} shouldn't been married "
 						print(str)
-	return 'str'
+	return str
 
 #User Story 31
 #List all living married people
