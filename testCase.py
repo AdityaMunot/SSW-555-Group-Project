@@ -16,6 +16,11 @@ class GedreaderTest(unittest.TestCase):
 		for i in CheckedIndividuals:
 			if i[4] != "NA":
 				self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
+	
+	def test_marriage_before_death(self):
+		self.assertEqual(marriage_before_death(family_list, individual_list),(['@F4@'], " list of families who do not have marriage date before death date of one of the members"))
+		self.assertNotEqual(marriage_before_death(family_list, individual_list), 1)
+		self.assertTrue(marriage_before_death(family_list, individual_list))
 
 	def test_MarriedDates(self):  # testCase for Check Married
 		today = datetime.today()
@@ -49,9 +54,10 @@ class GedreaderTest(unittest.TestCase):
 
 	# test case for user story 15, fewer than 15 siblings
 	def test_siblings_fewer_than_15(self):
-		temp = ['@F1@']
-		if Checked_fewer_than_15_siblings:
-			self.assertEqual(Checked_fewer_than_15_siblings, temp)
+		self.assertEqual(fewer_than_15_siblings(family_list), (['@F1@'], " list of families have 15 or more siblings"))
+		self.assertNotEqual(fewer_than_15_siblings(family_list),1)
+		self.assertTrue(fewer_than_15_siblings(family_list))
+
 
 	def test_marr_before_14(self):
 		a = [('Error,', '@F1@', 'married when less than 14'),
@@ -79,7 +85,7 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_correct_gender_for_role(self):  # test case for user story 21
 		self.assertEqual(correct_gender_for_role(
-		    family_list, individual_list), ('all gender roles in the families are correct'))
+		    family_list, individual_list), ('error: US 21 gender role are correct'))
 		self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
 		self.assertTrue(correct_gender_for_role(family_list, individual_list))
 		self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
@@ -88,6 +94,9 @@ class GedreaderTest(unittest.TestCase):
 	def test_unique_ids(self):  # test case for user story 22
 		self.assertEqual(unique_ids(family_list, individual_list),
 		                 ("all IDs unique in Family and Individual list"))
+		f1=[['@F2@', '@I3@', '@I4@', '1990 NOV 18', '2000 SEP 15', '@I34@'],['@F2@', '@I3@', '@I4@', '1990 NOV 18', '2000 SEP 15', '@I34@']]
+		f2=[['@F2@', '@I3@', '@I4@', '1990 NOV 18', '2000 SEP 15', ['@I1@',]]]
+		self.assertEqual(unique_ids(f1,f2), ('@F2@', ' not unique in family list'))
 		self.assertNotEqual(unique_ids(family_list, individual_list), 1)
 		self.assertTrue(unique_ids(family_list, individual_list))
 		self.assertIsNotNone(unique_ids(family_list, individual_list))
@@ -117,12 +126,10 @@ class GedreaderTest(unittest.TestCase):
 		self.assertIsNot(male_last_names(individual_list, family_list), '')
 	
 	def test_no_marriage_to_children(self):  #test User story 17 test case 
+
 		self.assertEqual(no_marriage_to_children(individual_list , family_list), ("No individuals in family are married to parents."))
 		self.assertNotEqual(no_marriage_to_children(individual_list , family_list), 1)
 		self.assertTrue(no_marriage_to_children(individual_list , family_list))
-		self.assertIsNotNone(no_marriage_to_children(individual_list , family_list))
-		self.assertIsNot(no_marriage_to_children(individual_list , family_list), "")
-	
 # For User Story 23 8
 class TestBirthDay(unittest.TestCase):
 	def test_unique_name_and_birthday(self):

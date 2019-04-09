@@ -78,11 +78,11 @@ def fewer_than_15_siblings(family_list):  # user story 15
 
     l = list()
     for i in family_list:
-        if len(i[5]) >= 15:
+        if len(i[5]) > 14:
             print("Error: ", i[0],
                   "family has more than 15 or greater siblings")
             l.append(i[0])
-    return l
+    return l, " list of families have 15 or more siblings"
 
 
 def birth_before_death(individual_list):
@@ -243,12 +243,12 @@ def correct_gender_for_role(family_list, individual_list): #user story 21
         for p in individual_list:
             if p[0]==hid:
                 if p[2]=="F":
-                    print(f"error: US 21 gender role for", p[0],"not correct")
+                    return(f"error: US 21 gender role for", p[0],"not correct")
         for q in individual_list:
             if q[0]==wid:
                 if q[2]=="M":
-                    print(f"error: US 21 gender role for", q[0], "not correct")
-    print(f"error: US 21 gender role are correct")
+                    return(f"error: US 21 gender role for", q[0], "not correct")
+    return(f"error: US 21 gender role are correct")
 
 
 def unique_ids(family_list, individual_list):  # user story 22
