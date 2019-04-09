@@ -346,8 +346,51 @@ def List_all_living_married_people(individual_list, family_list):
 	for people in married_people:
 		print(people[0] + ' , name: ' + people[1])
 
-checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
-checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
+def get_detail(id, individual_list):
+    for i in individual_list:
+        if i[0] == id:
+            return i
+
+
+#  User Story 13
+def Siblings_spacing():
+    error = 0
+    for i in family_list:
+        no_of_Child = len(i[5])
+        if no_of_Child > 1:
+            prev = datetime.strptime(get_detail(i[5][0], individual_list)[3], "%Y %b %d")
+            for j in range(1, no_of_Child):
+                curr = datetime.strptime(get_detail(i[5][j], individual_list)[3], "%Y %b %d")
+                datediff = prev - curr
+                days = int(abs(datediff / timedelta(days=1)))
+                if days > 2 and days < 240:
+                    print(f"Error: US13- Sibling Spacing Error in {i[5][j-1]} & {i[5][j]}")
+                    error += 1
+                prev = curr
+    return error
+
+
+#  User Story 14
+def Multiple_birth():
+    error = 0
+    for i in family_list:
+        no_of_Child = len(i[5])
+        if no_of_Child > 1:
+            m = []
+            count = 0
+            prev = datetime.strptime(get_detail(i[5][0], individual_list)[3], "%Y %b %d")
+            for j in range(1, no_of_Child):
+                curr = datetime.strptime(get_detail(i[5][j], individual_list)[3], "%Y %b %d")
+                if prev == curr:
+                    count = count + 1
+                else:
+                    count = 0
+                if count > 5:
+                    print(f"Error: US14 - Multiply birth detected in family {i}")
+                    error += 1
+    return error
+
+
 
 
 #Running User Stories
@@ -370,3 +413,8 @@ Checked_marriage_before_death = marriage_before_death(
     family_list, individual_list)  # Running User 05
 Checked_fewer_than_15_siblings = fewer_than_15_siblings(
     family_list)  # Running User Story 15
+
+checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
+checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
+checked_Sibling_spacing = Siblings_spacing() # running User Story 13
+checked_Multiple_birth = Multiple_birth() # running User Story 14
