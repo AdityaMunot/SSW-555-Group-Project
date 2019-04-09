@@ -99,6 +99,10 @@ class TestBirthDay(unittest.TestCase):
 	def test_birth_before_mariage_of_parents(self):
 		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: Krappa Chino Birth at 2018 SEP 7 have been duplicated ")
 
+#User Story 21
+	def test_aunts_and_uncles(self):
+		self.assertEqual(Aunts_and_uncles(individual_list,family_list), "")
+		
 """
 	def test_sibling_should_not_mawrry(self):
 		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
