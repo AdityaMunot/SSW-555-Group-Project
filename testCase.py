@@ -66,7 +66,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(checked_no_bigamy, error)
 
 	def test_parents_not_too_old(self):
-		error = 4
+		error = 5
 		self.assertEqual(checked_parents_not_too_old, error)
 
 	def test_Sibling_spacing(self):
@@ -79,7 +79,7 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_correct_gender_for_role(self):  # test case for user story 21
 		self.assertEqual(correct_gender_for_role(
-		    family_list, individual_list), ('invalid gender in family ', '@I1@'))
+		    family_list, individual_list), ('all gender roles in the families are correct'))
 		self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
 		self.assertTrue(correct_gender_for_role(family_list, individual_list))
 		self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
@@ -102,6 +102,12 @@ class GedreaderTest(unittest.TestCase):
 		"""test birth before marriage US 03"""
 		self.assertEqual((birth_before_marriage(individual_list, family_list)), [
 		                 ('Error: User', '@F4@', 'was born before marraige'), ('Error: User', '@F1@', 'was born before marraige')])
+
+	def test_sibling_should_not_mawrry(self):
+		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
+
+	def test_first_cousin_should_not_marry(self):
+		self.assertEqual(first_cousin_should_not_marry(),[('Error US 19 first cousins are getting married', '@F3@')])
 
 	def test_male_last_names(self):  # test user story 16 test case
 		self.assertEqual(male_last_names(individual_list, family_list), ('error in family','@F2@', ' male child last name not the same as fathers last name'))
@@ -127,14 +133,10 @@ class TestBirthDay(unittest.TestCase):
 
 # User Story 21
 	def test_aunts_and_uncles(self):
-		self.assertEqual(Aunts_and_uncles(individual_list,family_list), "")
+		self.assertEqual(Aunts_and_uncles(individual_list,family_list), "Error: Aunts and uncles shouldn't marry their nieces or nephews @I8@ and @I7@ shouldn't been married ")
 		
 """
-	def test_sibling_should_not_mawrry(self):
-		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
-
-	def test_first_cousin_should_not_marry(self):
-		self.assertEqual(first_cousin_should_not_marry(),[('Error US 19 first cousins are getting married', '@F3@')])
+	
 
 """
 
