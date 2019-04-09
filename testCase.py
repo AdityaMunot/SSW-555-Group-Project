@@ -62,11 +62,11 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(list(parents_birth_before_death()), [])
 
 	def test_no_bigamy(self):
-		error = 0
+		error = 1
 		self.assertEqual(checked_no_bigamy, error)
 
 	def test_parents_not_too_old(self):
-		error = 5
+		error = 4
 		self.assertEqual(checked_parents_not_too_old, error)
 
 	def test_Sibling_spacing(self):
@@ -96,18 +96,18 @@ class GedreaderTest(unittest.TestCase):
 	def test_birth_before_death(self):
 		"""for death before birth US US 02"""
 		self.assertEqual(birth_before_death(individual_list), [
-		                 ('Error: User', '@I5@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
+		                 ('Error: User', '@I6@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
 
 	def test_birth_before_marriage(self):
 		"""test birth before marriage US 03"""
 		self.assertEqual((birth_before_marriage(individual_list, family_list)), [
-		                 ('Error: User', '@F4@', 'was born before marraige'), ('Error: User', '@F1@', 'was born before marraige')])
+		                 ('Error: User', '@F1@', 'was born before marraige'), ('Error: User', '@F4@', 'was born before marraige')])
 
 	def test_sibling_should_not_mawrry(self):
 		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
 
 	def test_first_cousin_should_not_marry(self):
-		self.assertEqual(first_cousin_should_not_marry(),[('Error US 19 first cousins are getting married', '@F3@')])
+		self.assertEqual(first_cousin_should_not_marry(),[])
 
 	def test_male_last_names(self):  # test user story 16 test case
 		self.assertEqual(male_last_names(individual_list, family_list), ('error in family','@F2@', ' male child last name not the same as fathers last name'))
@@ -134,11 +134,6 @@ class TestBirthDay(unittest.TestCase):
 # User Story 21
 	def test_aunts_and_uncles(self):
 		self.assertEqual(Aunts_and_uncles(individual_list,family_list), "Error: Aunts and uncles shouldn't marry their nieces or nephews @I8@ and @I7@ shouldn't been married ")
-		
-"""
-	
-
-"""
 
 
 

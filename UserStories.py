@@ -32,8 +32,8 @@ def Divorce_before_death(family_list):  # User Story 6
                 if i[1] in j[0]:
                     wdeath = j[4]
             if i[4] > hdeath and i[4] > wdeath:
-                i[4] = "NA"
                 print(f"Error: US6- Divorce date {i[4]} is After Death ")
+                i[4] = "NA"
     return family_list
 
 
@@ -189,15 +189,19 @@ def no_bigamy(family_list, individual_list):  # user story 11
                         for k in individual_list:
                             if k[0] == spouse2 and k[4] != "NA" and k[4] > j[3]:
                                     print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                                    error += 1
                     elif div < j[3]:
                         print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                        error += 1
                 elif j[2] == spouse2:
                     if div == "NA":
                         for k in individual_list:
                             if k[0] == spouse1 and k[4] != "NA" and k[4] > j[3]:
                                     print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                                    error += 1
                     elif div < j[3]:
                         print(f"Error: US 11 - family {fam} and family {j[0]} marriage is bigamy")
+                        error += 1
     if error == 0:
         print("US 11: There is no bigamy in the Family")
     return error
@@ -396,10 +400,12 @@ def Multiple_birth():
                         curr = datetime.strptime(date, "%Y %b %d")
                         if prev == curr:
                             count = count + 1
+                            prev = curr
                         else:
                             count = 0
+                            prev = curr
                         if count > 5:
-                            print(f"Error: US14 - Multiply birth detected in family {i}")
+                            print(f"Error: US14 - Multiply birth detected in family {i[0]}")
                             error += 1
                     else:
                         print(f'Error: US14 - Date Error While Check US14')
