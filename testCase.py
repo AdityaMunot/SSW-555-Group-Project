@@ -69,6 +69,13 @@ class GedreaderTest(unittest.TestCase):
 		error = 4
 		self.assertEqual(checked_parents_not_too_old, error)
 
+	def test_Sibling_spacing(self):
+		error = 4
+		self.assertEqual(checked_Sibling_spacing, error)
+	
+	def test_Multiple_birth(self):
+		error = 0
+		self.assertEqual(checked_Multiple_birth, error)
 
 	def test_correct_gender_for_role(self): #test case for user story 21
 		self.assertEqual(correct_gender_for_role(family_list, individual_list),('invalid gender in family ', '@I1@'))
@@ -112,6 +119,7 @@ class TestBirthDay(unittest.TestCase):
 		self.assertEqual(first_cousin_should_not_marry(),[('Error US 19 first cousins are getting married', '@F3@')])
 
 """
+
 
 
 if __name__ == '__main__':
