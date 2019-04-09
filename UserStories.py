@@ -342,7 +342,7 @@ def Aunts_and_uncles(individual_list, family_list):
 						print(str)
 	return str
 
-#User Story 31
+#User Story 30
 #List all living married people
 def List_all_living_married_people(individual_list, family_list):
 	str = ''
@@ -359,6 +359,22 @@ def get_detail(id, individual_list):
     for i in individual_list:
         if i[0] == id:
             return i
+
+#User Story 31
+#List all living singles
+def List_all_living_singles(individual_list, family_list):
+  str = ''
+  singles = []
+  for i in individual_list:
+    if checkAlive(i[4]):
+      isSingle = False
+      for family in family_list:
+        if family[1] == i[0] or family[2] == i[0]:
+          isSingle = True
+      if isSingle:
+        singles.append(i)
+  for people in singles:
+    print(people[0] + ' , name: ' + people[1])
 
 
 #  User Story 13
