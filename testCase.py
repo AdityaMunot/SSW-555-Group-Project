@@ -84,11 +84,12 @@ class GedreaderTest(unittest.TestCase):
 		self.assertIsNotNone(unique_ids(family_list, individual_list))
 		self.assertIsNot(unique_ids(family_list, individual_list), "")
 
-	def test_wrong2(self):
-		"""for death before birth"""
+	def test_birth_before_death(self):
+		"""for death before birth US US 02"""
 		self.assertEqual(birth_before_death(individual_list), [('Error: User', '@I5@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
 
-	def test_normal(self):
+	def test_birth_before_marriage(self):
+		"""test birth before marriage US 03"""
 		self.assertEqual((birth_before_marriage(individual_list, family_list)),[('Error: User', '@F4@', 'was born before marraige'), ('Error: User', '@F1@', 'was born before marraige')])
 
 #For User Story 23 8
