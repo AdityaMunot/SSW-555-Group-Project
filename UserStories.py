@@ -320,6 +320,32 @@ def first_cousin_should_not_marry():
                 l.append(("Error US 19 first cousins are getting married", k[0]))
     return l
 
+#User Story 20
+#Aunts and uncles shouldn't marry their nieces or nephews
+def Aunts_and_uncles(individual_list, family_list):
+	str = ''
+	for grand_family in family_list:
+		for individual_1 in grand_family[5]:
+			for individual_2 in grand_family[5]:
+				for family in family_list:
+					if ((family[1] == individual_1 and family[2] == individual_2) or(family[2] == individual_1 and family[1] == individual_2)):
+						str = f"Error: Aunts and uncles shouldn't marry their nieces or nephews {individual_1} and {individual_2} shouldn't been married "
+						print(str)
+	return 'str'
+
+#User Story 31
+#List all living married people
+def List_all_living_married_people(individual_list, family_list):
+	str = ''
+	married_people = []
+	for i in individual_list:
+		if checkAlive(i[4]):
+			for family in family_list:
+				if family[1] == i[0] or family[2] == i[0]:
+					married_people.append(i)
+	for people in married_people:
+		print(people[0] + ' , name: ' + people[1])
+
 checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
 checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
 
