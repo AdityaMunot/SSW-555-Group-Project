@@ -235,16 +235,20 @@ def parents_not_too_old(family_list, individual_list):  # User Story 12
     return error
 
 
-def correct_gender_for_role(family_list, individual_list):  # user story 21
+def correct_gender_for_role(family_list, individual_list): #user story 21
     for i in family_list:
-        for j in individual_list:
-            if i[1] == j[0]:
-                if j[2] !="M":
-                    return("invalid gender in family ", i[1])
-            if i[2] == j[0]:
-                if j[2] != "F":
-                    return("invalid gender in family ", i[1])
-    return "all gender roles in the families are correct"
+        hid=i[1]
+        wid=i[2]
+
+        for p in individual_list:
+            if p[0]==hid:
+                if p[2]=="F":
+                    print(f"error: US 21 gender role for", p[0],"not correct")
+        for q in individual_list:
+            if q[0]==wid:
+                if q[2]=="M":
+                    print(f"error: US 21 gender role for", q[0], "not correct")
+    print(f"error: US 21 gender role are correct")
 
 
 def unique_ids(family_list, individual_list):  # user story 22
