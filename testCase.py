@@ -98,7 +98,22 @@ class GedreaderTest(unittest.TestCase):
 	def test_birth_before_marriage(self):
 		"""test birth before marriage US 03"""
 		self.assertEqual((birth_before_marriage(individual_list, family_list)),[('Error: User', '@F4@', 'was born before marraige'), ('Error: User', '@F1@', 'was born before marraige')])
-
+	
+	def test_male_last_names(self): #test user story 16 test case
+        	self.assertEqual(male_last_names(individual_list, family_list),('error in family', '@F1@', ' male child last name not the same as fathers last name'))
+        	self.assertNotEqual(male_last_names(individual_list, family_list), 1)
+        	self.assertTrue(male_last_names(individual_list, family_list))
+        	self.assertIsNotNone(male_last_names(individual_list, family_list))
+        	self.assertIsNot(male_last_names(individual_list, family_list), '')
+        
+    
+    	def test_no_marriage_to_children(self):  #test User story 17 test case 
+        	self.assertEqual(no_marriage_to_children(individual_list , family_list), ("No individuals in family are married to parents."))
+        	self.assertNotEqual(no_marriage_to_children(individual_list , family_list), 1)
+        	self.assertTrue(no_marriage_to_children(individual_list , family_list))
+        	self.assertIsNotNone(no_marriage_to_children(individual_list , family_list))
+        	self.assertIsNot(no_marriage_to_children(individual_list , family_list), "")
+	
 #For User Story 23 8
 class TestBirthDay(unittest.TestCase):
 	def test_unique_name_and_birthday(self):
