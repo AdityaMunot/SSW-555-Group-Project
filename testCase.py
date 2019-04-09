@@ -59,7 +59,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(list(marriage_under_age_14()), a)
 
 	def test_parents_birth_bfr_death(self):
-		self.assertEqual(list(parents_birth_before_death()),[])
+		self.assertEqual(list(parents_birth_before_death()), [])
 
 	def test_no_bigamy(self):
 		error = 0
@@ -72,20 +72,22 @@ class GedreaderTest(unittest.TestCase):
 	def test_Sibling_spacing(self):
 		error = 4
 		self.assertEqual(checked_Sibling_spacing, error)
-	
+
 	def test_Multiple_birth(self):
 		error = 0
 		self.assertEqual(checked_Multiple_birth, error)
 
-	def test_correct_gender_for_role(self): #test case for user story 21
-		self.assertEqual(correct_gender_for_role(family_list, individual_list),('invalid gender in family ', '@I1@'))
+	def test_correct_gender_for_role(self):  # test case for user story 21
+		self.assertEqual(correct_gender_for_role(
+		    family_list, individual_list), ('invalid gender in family ', '@I1@'))
 		self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
 		self.assertTrue(correct_gender_for_role(family_list, individual_list))
 		self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
 		self.assertIsNot(correct_gender_for_role(family_list, individual_list), '')
 
-	def test_unique_ids(self):  #test case for user story 22
-		self.assertEqual(unique_ids(family_list, individual_list), ("all IDs unique in Family and Individual list"))
+	def test_unique_ids(self):  # test case for user story 22
+		self.assertEqual(unique_ids(family_list, individual_list),
+		                 ("all IDs unique in Family and Individual list"))
 		self.assertNotEqual(unique_ids(family_list, individual_list), 1)
 		self.assertTrue(unique_ids(family_list, individual_list))
 		self.assertIsNotNone(unique_ids(family_list, individual_list))
@@ -93,28 +95,29 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_birth_before_death(self):
 		"""for death before birth US US 02"""
-		self.assertEqual(birth_before_death(individual_list), [('Error: User', '@I5@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
+		self.assertEqual(birth_before_death(individual_list), [
+		                 ('Error: User', '@I5@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
 
 	def test_birth_before_marriage(self):
 		"""test birth before marriage US 03"""
-		self.assertEqual((birth_before_marriage(individual_list, family_list)),[('Error: User', '@F4@', 'was born before marraige'), ('Error: User', '@F1@', 'was born before marraige')])
+		self.assertEqual((birth_before_marriage(individual_list, family_list)), [
+		                 ('Error: User', '@F4@', 'was born before marraige'), ('Error: User', '@F1@', 'was born before marraige')])
+
+	def test_male_last_names(self):  # test user story 16 test case
+		self.assertEqual(male_last_names(individual_list, family_list), ('error in family','@F2@', ' male child last name not the same as fathers last name'))
+		self.assertNotEqual(male_last_names(individual_list, family_list), 1)
+		self.assertTrue(male_last_names(individual_list, family_list))
+		self.assertIsNotNone(male_last_names(individual_list, family_list))
+		self.assertIsNot(male_last_names(individual_list, family_list), '')
 	
-	def test_male_last_names(self): #test user story 16 test case
-        	self.assertEqual(male_last_names(individual_list, family_list),('error in family', '@F1@', ' male child last name not the same as fathers last name'))
-        	self.assertNotEqual(male_last_names(individual_list, family_list), 1)
-        	self.assertTrue(male_last_names(individual_list, family_list))
-        	self.assertIsNotNone(male_last_names(individual_list, family_list))
-        	self.assertIsNot(male_last_names(individual_list, family_list), '')
-        
-    
-    	def test_no_marriage_to_children(self):  #test User story 17 test case 
-        	self.assertEqual(no_marriage_to_children(individual_list , family_list), ("No individuals in family are married to parents."))
-        	self.assertNotEqual(no_marriage_to_children(individual_list , family_list), 1)
-        	self.assertTrue(no_marriage_to_children(individual_list , family_list))
-        	self.assertIsNotNone(no_marriage_to_children(individual_list , family_list))
-        	self.assertIsNot(no_marriage_to_children(individual_list , family_list), "")
+	def test_no_marriage_to_children(self):  #test User story 17 test case 
+		self.assertEqual(no_marriage_to_children(individual_list , family_list), ("No individuals in family are married to parents."))
+		self.assertNotEqual(no_marriage_to_children(individual_list , family_list), 1)
+		self.assertTrue(no_marriage_to_children(individual_list , family_list))
+		self.assertIsNotNone(no_marriage_to_children(individual_list , family_list))
+		self.assertIsNot(no_marriage_to_children(individual_list , family_list), "")
 	
-#For User Story 23 8
+# For User Story 23 8
 class TestBirthDay(unittest.TestCase):
 	def test_unique_name_and_birthday(self):
 		self.assertEqual(Unique_name_and_birthday(individual_list), "")
@@ -122,7 +125,7 @@ class TestBirthDay(unittest.TestCase):
 	def test_birth_before_mariage_of_parents(self):
 		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: Krappa Chino Birth at 2018 SEP 7 have been duplicated ")
 
-#User Story 21
+# User Story 21
 	def test_aunts_and_uncles(self):
 		self.assertEqual(Aunts_and_uncles(individual_list,family_list), "")
 		

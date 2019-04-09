@@ -1,4 +1,5 @@
 from HW3AdityaMunot import *
+from datetime import timedelta
 
 
 def CheckDates(Tlist):  # Check dates in gedcom file are before current date
@@ -358,15 +359,23 @@ def Siblings_spacing():
     for i in family_list:
         no_of_Child = len(i[5])
         if no_of_Child > 1:
-            prev = datetime.strptime(get_detail(i[5][0], individual_list)[3], "%Y %b %d")
-            for j in range(1, no_of_Child):
-                curr = datetime.strptime(get_detail(i[5][j], individual_list)[3], "%Y %b %d")
-                datediff = prev - curr
-                days = int(abs(datediff / timedelta(days=1)))
-                if days > 2 and days < 240:
-                    print(f"Error: US13- Sibling Spacing Error in {i[5][j-1]} & {i[5][j]}")
-                    error += 1
-                prev = curr
+            date = get_detail(i[5][0], individual_list)[3]
+            if date != 'NA':
+                prev = datetime.strptime(date, "%Y %b %d")
+                for j in range(1, no_of_Child):
+                    date = get_detail(i[5][j], individual_list)[3]
+                    if date != "NA":
+                        curr = datetime.strptime(date, "%Y %b %d")
+                        datediff = prev - curr
+                        days = int(abs(datediff / timedelta(days=1)))
+                        if days > 2 and days < 240:
+                            print(f"Error: US13- Sibling Spacing Error in {i[5][j-1]} & {i[5][j]}")
+                            error += 1
+                        prev = curr
+                    else:
+                        print(f'Error: US13 - Date Error While Check US13')
+            else:
+                print(f'Error: US13 - Date Error While Check US13')
     return error
 
 
@@ -378,16 +387,24 @@ def Multiple_birth():
         if no_of_Child > 1:
             m = []
             count = 0
-            prev = datetime.strptime(get_detail(i[5][0], individual_list)[3], "%Y %b %d")
-            for j in range(1, no_of_Child):
-                curr = datetime.strptime(get_detail(i[5][j], individual_list)[3], "%Y %b %d")
-                if prev == curr:
-                    count = count + 1
-                else:
-                    count = 0
-                if count > 5:
-                    print(f"Error: US14 - Multiply birth detected in family {i}")
-                    error += 1
+            date = get_detail(i[5][0], individual_list)[3]
+            if date != 'NA':
+                prev = datetime.strptime(date, "%Y %b %d")
+                for j in range(1, no_of_Child):
+                    date = get_detail(i[5][j], individual_list)[3]
+                    if date != 'NA':
+                        curr = datetime.strptime(date, "%Y %b %d")
+                        if prev == curr:
+                            count = count + 1
+                        else:
+                            count = 0
+                        if count > 5:
+                            print(f"Error: US14 - Multiply birth detected in family {i}")
+                            error += 1
+                    else:
+                        print(f'Error: US14 - Date Error While Check US14')
+            else:
+                print(f'Error: US14 - Date Error While Check US14')
     return error
 
 
