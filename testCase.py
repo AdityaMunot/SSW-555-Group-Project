@@ -66,7 +66,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(checked_no_bigamy, error)
 
 	def test_parents_not_too_old(self):
-		error = 4
+		error = 5
 		self.assertEqual(checked_parents_not_too_old, error)
 
 	def test_Sibling_spacing(self):
@@ -74,7 +74,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(checked_Sibling_spacing, error)
 
 	def test_Multiple_birth(self):
-		error = 0
+		error = 1
 		self.assertEqual(checked_Multiple_birth, error)
 
 	def test_correct_gender_for_role(self):  # test case for user story 21
