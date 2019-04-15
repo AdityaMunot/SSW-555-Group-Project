@@ -130,6 +130,15 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(no_marriage_to_children(individual_list , family_list), ("No individuals in family are married to parents."))
 		self.assertNotEqual(no_marriage_to_children(individual_list , family_list), 1)
 		self.assertTrue(no_marriage_to_children(individual_list , family_list))
+
+	def test_living_married(self):
+		"""US 30 List of living Married"""
+		self.assertEqual(list_living_married(),['@I5@', '@I11@'])
+
+	def test_unique_name(self):
+		"""US 25 List of Unique First names"""
+		self.assertEqual(unique_first_name(), ['Michael', 'Holly', 'Jim', 'Pam', 'Dwight', 'Andy', 'Ryan', 'Kelly', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P9', 'P10', 'P11', 'P12', 'P13', 'Cousin', 'P14', 'P15', 'Kappa', 'Krappa', 'Suhas', 'Tina', 'Kim', 'Duhas', 'Fuhas', 'Guhas', 'Huhas', 'Juhas', 'Kuhas', 'Kij'])
+
 # For User Story 23 8
 class TestBirthDay(unittest.TestCase):
 	def test_unique_name_and_birthday(self):
