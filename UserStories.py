@@ -509,3 +509,5 @@ checked_Sibling_spacing = Siblings_spacing() # running User Story 13
 checked_Multiple_birth = Multiple_birth() # running User Story 14
 print(male_last_names(individual_list,family_list)) #running user story 16
 print(no_marriage_to_children(individual_list,family_list))# running user story 17
+Unique_name_and_birthday(individual_list)  # Running user story 23
+Birth_before_mariage_of_parents(individual_list, family_list)  # Runnning User story 08
