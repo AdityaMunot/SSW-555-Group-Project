@@ -161,14 +161,6 @@ def parents_birth_before_death():  # birth before death of parents
 					if j[3] != "NA":
 						children_dob.append(
 							(j[3]))
-						"""children_dob.append(
-							str(datetime.strptime(j[3], "%Y %b %d")))"""
-				"""if j[0] == mom_id:
-					if j[4] != "NA":
-						dom = datetime.strptime(j[4], "%Y %b %d")
-				elif j[0] == dad_id:
-					if j[4] != "NA":
-						dodd = datetime.strptime(j[4], "%Y %b %d")"""
 				for k in individual_list:
 					#print(k[4])
 					if k[0] == mom_id:

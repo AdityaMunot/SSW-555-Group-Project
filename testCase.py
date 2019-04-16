@@ -66,7 +66,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(list(marriage_under_age_14()), a)
 
 	def test_parents_birth_bfr_death(self):
-		self.assertEqual(list(parents_birth_before_death()), [])
+		self.assertEqual(list(parents_birth_before_death()), [('Error parent id', '@I3@', 'children born after parents death')])
 
 	def test_no_bigamy(self):
 		error = 1
