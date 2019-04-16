@@ -147,8 +147,10 @@ def marriage_under_age_14():
 
 
 def parents_birth_before_death():  # birth before death of parents
-	l = []
+	l = set()
 	for i in family_list:
+		dom = None
+		dodd = None
 		children = i[5]
 		children_dob = []
 		if len(children) > 0:
@@ -158,22 +160,35 @@ def parents_birth_before_death():  # birth before death of parents
 				if j[0] in children:
 					if j[3] != "NA":
 						children_dob.append(
-							datetime.strptime(j[3], "%Y %b %d"))
-				if j[0] == mom_id:
+							(j[3]))
+						"""children_dob.append(
+							str(datetime.strptime(j[3], "%Y %b %d")))"""
+				"""if j[0] == mom_id:
 					if j[4] != "NA":
 						dom = datetime.strptime(j[4], "%Y %b %d")
 				elif j[0] == dad_id:
 					if j[4] != "NA":
-						dodd = datetime.strptime(j[4], "%Y %b %d")
-			for f in children_dob:
-				try:
-					if f > dom and f > dodd:
-						l.append(
-							("Error", i[0], "children born after parents death"))
-				except UnboundLocalError:
-					continue
-	return l
+						dodd = datetime.strptime(j[4], "%Y %b %d")"""
+				for k in individual_list:
+					#print(k[4])
+					if k[0] == mom_id:
+						dom = k[4]
+					if j[0] == dad_id:
+						dodd = k[4]
+					for f in children_dob:
+						try:
+							if f > dom:
+								l.add(
+									("Error, parent id", i[2], "children born after parents death"))
+							if f > dodd:
+								l.add(
+									("Error parent id", i[1], "children born after parents death"))
+						except TypeError:
+							continue
+						except UnboundLocalError:
+							continue
 
+	return sorted(l)
 
 def no_bigamy(family_list, individual_list):  # user story 11
 	error = 0
@@ -483,7 +498,7 @@ def unique_first_name(): #US 25
 print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
 print(list(marriage_under_age_14()))
-print(list(parents_birth_before_death()))
+print((parents_birth_before_death()))
 print(correct_gender_for_role(family_list, individual_list))
 print(unique_ids(family_list,individual_list))
 print(list(sibling_should_not_mawrry()))
