@@ -118,6 +118,10 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_first_cousin_should_not_marry(self):
 		self.assertEqual(first_cousin_should_not_marry(),[])
+		"""
+		# This is the demonstration test case when you run Family-cousins marry.ged (Did it in another gedcom because the gedcom had becoming really confusing one change and it was breaking everything)
+		self.assertEqual(first_cousin_should_not_marry(),[('Error US 19 first cousins are getting married', '@F3@')])
+		"""
 
 	def test_male_last_names(self):  # test user story 16 test case
 		self.assertEqual(male_last_names(individual_list, family_list), ('error in family','@F2@', ' male child last name not the same as fathers last name'))
