@@ -451,15 +451,14 @@ def male_last_names(individual_list, family_list): #user story 16
 	return("all male child last names in the family are the same.")
 
 
-def no_marriage_to_children(individual_list , family_list): #User story 17
-	for i in family_list:
-		for c in i[5]:
-			for j in individual_list:
-				if j[0]==c:
-					if (j[5]== i[1] ) or ( j[5] == i[2]):
-						return("ERROR in family ",i[0], " child is married to parent")
 
-	return("No individuals in family are married to parents.")
+def no_marriage_to_children(individual_list, family_list): #user story 17
+    for i in family_list:
+        for c in i[5]:
+            for j in family_list:
+                if (j[1]==c or j[2]==c) and (j[1]==i[1] or j[2]==i[2]):
+                    return ("error user story 17 ",c , " is married to parent")
+    return("No individuals in family are married to parents.")
 
 
 def list_living_married(): # US 30
