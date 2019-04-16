@@ -61,7 +61,8 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_marr_before_14(self):
 		a = [('Error,', '@F1@', 'married when less than 14'),
-			 ('Error,', '@F4@', 'married when less than 14')]
+			 ('Error,', '@F4@', 'married when less than 14'),
+			 ('Error,', '@F9@', 'married when less than 14')]
 		self.assertEqual(list(marriage_under_age_14()), a)
 
 	def test_parents_birth_bfr_death(self):
@@ -72,7 +73,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(checked_no_bigamy, error)
 
 	def test_parents_not_too_old(self):
-		error = 5
+		error = 4
 		self.assertEqual(checked_parents_not_too_old, error)
 
 	def test_Sibling_spacing(self):
@@ -137,15 +138,15 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_unique_name(self):
 		"""US 25 List of Unique First names"""
-		self.assertEqual(unique_first_name(), ['Michael', 'Holly', 'Jim', 'Pam', 'Dwight', 'Andy', 'Ryan', 'Kelly', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P9', 'P10', 'P11', 'P12', 'P13', 'Cousin', 'P14', 'P15', 'Kappa', 'Krappa', 'Suhas', 'Tina', 'Kim', 'Duhas', 'Fuhas', 'Guhas', 'Huhas', 'Juhas', 'Kuhas', 'Kij'])
+		self.assertEqual(unique_first_name(), ['Michael', 'Holly', 'Jim', 'Pam', 'Dwight', 'Andy', 'Ryan', 'Kelly', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P9', 'P10', 'P11', 'P12', 'P13', 'Cousin', 'P14', 'P15', 'Kappa', 'Krappa', 'Suhas', 'Tina', 'Kim', 'Duhas', 'Fuhas', 'Guhas', 'Huhas', 'Juhas', 'Kuhas', 'Kij', 'Lifu', 'Kifu', 'Fuli', 'Kuli', 'Kuli'])
 
 # For User Story 23 8
 class TestBirthDay(unittest.TestCase):
 	def test_unique_name_and_birthday(self):
-		self.assertEqual(Unique_name_and_birthday(individual_list), "")
+		self.assertEqual(Unique_name_and_birthday(individual_list), "Error: US23 Kuli Halpert Birth at 2009 OCT 13 have been duplicated ")
 
 	def test_birth_before_mariage_of_parents(self):
-		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: Krappa Chino Birth at 2018 SEP 7 have been duplicated ")
+		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: US08 Kuli Halpert Birth before marriage of parents")
 
 # User Story 21
 	def test_aunts_and_uncles(self):

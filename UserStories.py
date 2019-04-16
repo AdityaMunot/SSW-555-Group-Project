@@ -277,7 +277,7 @@ def Unique_name_and_birthday(individual_list):
 		for j in individual_list:
 			if i[0] != j[0]:
 				if i[1]== j[1] and i[3]== j[3]:
-					str = f"Error: {i[1]} Birth at {i[3]} have been duplicated "
+					str = f"Error: US23 {i[1]} Birth at {i[3]} have been duplicated "
 					print(str)
 	return str
 
@@ -289,7 +289,7 @@ def Birth_before_mariage_of_parents(individual_list, family_list):
 			for i in individual_list:
 				if child == i[0]:
 					if i[3] < family[3]:
-						str = f"Error: {i[1]} Birth at {i[3]} have been duplicated "
+						str = f"Error: US08 {i[1]} Birth before marriage of parents"
 						print(str)
 	return str
 
