@@ -243,6 +243,7 @@ def parents_not_too_old(family_list, individual_list):  # User Story 12
 
 
 def correct_gender_for_role(family_list, individual_list): #user story 21
+	error = 0
 	for i in family_list:
 		hid=i[1]
 		wid=i[2]
@@ -250,31 +251,33 @@ def correct_gender_for_role(family_list, individual_list): #user story 21
 		for p in individual_list:
 			if p[0]==hid:
 				if p[2]=="F":
-					return(f"error: US 21 gender role for", p[0],"not correct")
+					print(f"error: US 21 gender role for,{p[0]} not correct")
+					error += 1
 		for q in individual_list:
 			if q[0]==wid:
 				if q[2]=="M":
-					return(f"error: US 21 gender role for", q[0], "not correct")
-	return(f"error: US 21 gender role are correct")
+					print(f"error: US 21 gender role for {q[0]} not correct")
+					error += 1
+	return error
 
 
 def unique_ids(family_list, individual_list):  # user story 22
 	uid = list()
 	fid = list()
-
+	error = 0
 	for i in family_list:
 		if i[0] not in fid:
 			fid.append(i[0])
 		else:
-			return i[0], " not unique in family list"
-
+			print("error: US 22 " + i[0] + " not unique in family list")
+			error += 1
 	for i in individual_list:
 		if i[0] not in uid:
 			uid.append(i[0])
 		else:
-			return i[0], " not unique in individual list"
-
-	return "all IDs unique in Family and Individual list"
+			print("error: US 22 " + i[0] + " not unique in individual list")
+			error += 1
+	return error
 
 
 #User Story 23
@@ -460,12 +463,15 @@ def male_last_names(individual_list, family_list): #user story 16
 
 
 def no_marriage_to_children(individual_list, family_list): #user story 17
-    for i in family_list:
-        for c in i[5]:
-            for j in family_list:
-                if (j[1]==c or j[2]==c) and (j[1]==i[1] or j[2]==i[2]):
-                    return ("error user story 17 ",c , " is married to parent")
-    return("No individuals in family are married to parents.")
+	error = 0
+	for i in family_list:
+		for c in i[5]:
+			for j in family_list:
+				if (j[1]==c or j[2]==c) and (j[1]==i[1] or j[2]==i[2]):
+					print("error: US 17 " + c +" is married to parent")
+					error += 1
+	return error
+					
 
 
 def list_living_married(): # US 30
@@ -491,8 +497,8 @@ print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
 print(list(marriage_under_age_14()))
 print((parents_birth_before_death()))
-print(correct_gender_for_role(family_list, individual_list))
-print(unique_ids(family_list,individual_list))
+check_correct_gender_for_role = correct_gender_for_role(family_list, individual_list)  # Running User Story 21
+check_unique_ids = unique_ids(family_list,individual_list)  # Running User Story 22
 print(list(sibling_should_not_mawrry()))
 print(list(first_cousin_should_not_marry()))
 print("list of living married", list(list_living_married()))
@@ -515,6 +521,6 @@ checked_parents_not_too_old = parents_not_too_old(family_list, individual_list) 
 checked_Sibling_spacing = Siblings_spacing() # running User Story 13
 checked_Multiple_birth = Multiple_birth() # running User Story 14
 print(male_last_names(individual_list,family_list)) #running user story 16
-print(no_marriage_to_children(individual_list,family_list))# running user story 17
+check_no_marriage_to_children = no_marriage_to_children(individual_list,family_list)# running user story 17
 Unique_name_and_birthday(individual_list)  # Running user story 23
 Birth_before_mariage_of_parents(individual_list, family_list)  # Runnning User story 08
