@@ -342,52 +342,33 @@ def first_cousin_should_not_marry():
 
 #User Story 20
 #Aunts and uncles shouldn't marry their nieces or nephews
-def Aunts_and_uncles(individual_list, family_list):
-	str = ''
-	for grand_family in family_list:
-		for individual_1 in grand_family[5]:
-			for individual_2 in grand_family[5]:
-				for family in family_list:
-					if ((family[1] == individual_1 and family[2] == individual_2) or(family[2] == individual_1 and family[1] == individual_2)):
-						str = f"Error: Aunts and uncles shouldn't marry their nieces or nephews {individual_1} and {individual_2} shouldn't been married "
-						print(str)
-	return str
+def Aunts_and_uncles(individual_list, family_list): #User Story 20 Aunts and uncles shouldn't marry their nieces or nephews
+    error = 0
+    for i in family_list:
+        for j in family_list:
+            if (i[1] or i[2]) in j[5]:
+                for k in family_list:
+                    if ((k[1] in i[5]) and (k[2] in j[5])) or ((k[1] in j[5]) and (k[2] in i[5])):
+                        print("error: US 20 aunt or uncle married nephew or niece in family" + k[0])
+                        error += 1
+    return error
 
-#User Story 30
-#List all living married people
-def List_all_living_married_people(individual_list, family_list):
-	str = ''
-	married_people = []
-	for i in individual_list:
-		if checkAlive(i[4]):
-			for family in family_list:
-				if family[1] == i[0] or family[2] == i[0]:
-					married_people.append(i)
-	for people in married_people:
-		print(people[0] + ' , name: ' + people[1])
+#User Story 31
+#List all living singles
+def list_living_single(individual_list):  # User story 31
+    all_living_over30 = list()
+    for i in individual_list:
+        if calculate_age(i[3], i[4]) != 'NA':
+            if (i[4] == "NA") and (calculate_age(i[3], i[4]) > 30) and (i[5] == "NA"):
+                all_living_over30.append(i[0])
+    print("US 31 list of all living singles over 30", all_living_over30)
+    return all_living_over30
+
 
 def get_detail(id, individual_list):
 	for i in individual_list:
 		if i[0] == id:
 			return i
-
-
-#User Story 31
-#List all living singles
-def List_all_living_singles(individual_list, family_list):
-	str = ''
-	singles = []
-	for i in individual_list:
-		if checkAlive(i[4]):
-			isSingle = False
-			for family in family_list:
-				if family[1] == i[0] or family[2] == i[0]:
-					isSingle = True
-			if isSingle:
-				singles.append(i)
-	for people in singles:
-		print(people[0] + ' , name: ' + people[1])
-
 
 #  User Story 13
 def Siblings_spacing():
@@ -572,7 +553,7 @@ def list_of_orphans(individual_list, family_list): # user story 33
             continue
         for child in i[5]:
             for j in individual_list:
-                if j[0] == child and (calculate_age(j[3], j[4]) < 18):
+                if j[0] == child and (calculate_age(j[3], j[4]) != "NA" and calculate_age(j[3], j[4]) < 18):
                     for k in individual_list:
                         if k[0] == hid and k[4] != "NA":
                             for l in individual_list:
@@ -619,3 +600,7 @@ Birth_before_mariage_of_parents(individual_list, family_list)  # Runnning User s
 print(unique_families_by_spouses(family_list, individual_list))#running user story 24
 print(list_of_orphans(individual_list, family_list))#running user story 33
 print(list_large_age_difference(individual_list, family_list)) # running 34
+
+check_Aunts_and_uncles = Aunts_and_uncles(individual_list, family_list) # Running 20
+
+living_single = list_living_single(individual_list) # Running 31

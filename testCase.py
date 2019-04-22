@@ -137,10 +137,14 @@ class TestBirthDay(unittest.TestCase):
 	def test_birth_before_mariage_of_parents(self):
 		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: US08 Kuli Halpert Birth before marriage of parents")
 
-# User Story 21
+# User Story 20
 	def test_aunts_and_uncles(self):
-		self.assertEqual(Aunts_and_uncles(individual_list,family_list), "Error: Aunts and uncles shouldn't marry their nieces or nephews @I8@ and @I7@ shouldn't been married ")
-
+        error = 2
+        self.assertEqual(check_Aunts_and_uncles, error)
+# User Story 31
+    def test_list_living_single(self):
+        listsingle = ['@I13@']
+        self.assertEqual(living_single, listsingle)
 
 
 if __name__ == '__main__':
