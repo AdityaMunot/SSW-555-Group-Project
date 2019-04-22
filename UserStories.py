@@ -492,6 +492,39 @@ def unique_first_name(): #US 25
 			list_first_name.append(fname[0])
 	return list_first_name
 
+#User Story 24
+#Unique families by spouses, only one family for the pair of same name of the spouse and marrige date
+def Unique_families_by_spouses(family_list):
+    str = ''
+    for family in family_list:
+        husband_id = family[1]
+        wife_id = family[2]
+        for family_compair in family_list:
+            if family == family_compair:
+                continue;
+            elif (family_compair[1] == husband_id and family_compair[2] == wife_id):
+                str += family[0] + " and " + family_compair[0] + " are duplicated!"
+    print(str)
+    return str
+
+#User Story 28
+#Order siblings by age for families
+def Order_sibling_by_age(individual_list, family_list):
+    for family in family_list:
+        siblings = []
+        for child in family[5]:
+            for i in individual_list:
+                if i[0] == child:
+                    j = 0
+                    for sibling in siblings:
+                        print(str(calculate_age(sibling[3], sibling[4])) + "::" + str(calculate_age(i[3], i[4])))
+                        if calculate_age(sibling[3], sibling[4]) < calculate_age(i[3], i[4]):
+                            siblings.insert(j, i)
+                            break
+                        j += 1
+                    siblings.append(i)
+        print(siblings)
+
 #Running User Stories
 print(birth_before_death(individual_list))
 print(birth_before_marriage(individual_list, family_list))
@@ -503,6 +536,7 @@ print(list(sibling_should_not_mawrry()))
 print(list(first_cousin_should_not_marry()))
 print("list of living married", list(list_living_married()))
 print("list of people with unique name", list(unique_first_name()))
+Order_sibling_by_age(individual_list, family_list)
 
 
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
