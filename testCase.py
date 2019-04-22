@@ -85,23 +85,10 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(checked_Multiple_birth, error)
 
 	def test_correct_gender_for_role(self):  # test case for user story 21
-		self.assertEqual(correct_gender_for_role(
-		    family_list, individual_list), ('error: US 21 gender role are correct'))
-		self.assertNotEqual(correct_gender_for_role(family_list, individual_list), 1)
-		self.assertTrue(correct_gender_for_role(family_list, individual_list))
-		self.assertIsNotNone(correct_gender_for_role(family_list, individual_list))
-		self.assertIsNot(correct_gender_for_role(family_list, individual_list), '')
+		self.assertEqual(check_correct_gender_for_role, 0)
 
 	def test_unique_ids(self):  # test case for user story 22
-		self.assertEqual(unique_ids(family_list, individual_list),
-		                 ("all IDs unique in Family and Individual list"))
-		f1=[['@F2@', '@I3@', '@I4@', '1990 NOV 18', '2000 SEP 15', '@I34@'],['@F2@', '@I3@', '@I4@', '1990 NOV 18', '2000 SEP 15', '@I34@']]
-		f2=[['@F2@', '@I3@', '@I4@', '1990 NOV 18', '2000 SEP 15', ['@I1@',]]]
-		self.assertEqual(unique_ids(f1,f2), ('@F2@', ' not unique in family list'))
-		self.assertNotEqual(unique_ids(family_list, individual_list), 1)
-		self.assertTrue(unique_ids(family_list, individual_list))
-		self.assertIsNotNone(unique_ids(family_list, individual_list))
-		self.assertIsNot(unique_ids(family_list, individual_list), "")
+		self.assertEqual(check_unique_ids, 0)
 
 	def test_birth_before_death(self):
 		"""for death before birth US US 02"""
@@ -132,9 +119,7 @@ class GedreaderTest(unittest.TestCase):
 	
 	def test_no_marriage_to_children(self):  #test User story 17 test case 
 
-		self.assertEqual(no_marriage_to_children(individual_list , family_list), ("No individuals in family are married to parents."))
-		self.assertNotEqual(no_marriage_to_children(individual_list , family_list), 1)
-		self.assertTrue(no_marriage_to_children(individual_list , family_list))
+		self.assertEqual(check_no_marriage_to_children, 0)
 
 	def test_living_married(self):
 		"""US 30 List of living Married"""
