@@ -85,7 +85,7 @@ class GedreaderTest(unittest.TestCase):
 		self.assertEqual(checked_Multiple_birth, error)
 
 	def test_correct_gender_for_role(self):  # test case for user story 21
-		self.assertEqual(check_correct_gender_for_role, 0)
+		self.assertEqual(checked_correct_gender_for_role, 1)
 
 	def test_unique_ids(self):  # test case for user story 22
 		self.assertEqual(check_unique_ids, 0)
