@@ -522,6 +522,67 @@ def order_sibling_by_age(): #User story 28
 		whole_list.append((ind[0], ordered_list))
 	return whole_list
 
+
+def unique_families_by_spouses(family_list, individual_list):  #user story 24
+
+    for i in family_list:
+        hname= Getname(individual_list, i[1])
+        wname= Getname(individual_list,i[2])
+        mdate=i[3]
+        for j in family_list:
+            if ((j[0]!=i[0]) and (Getname(individual_list,j[1])==hname) and (j[3]==mdate)):
+                return"error user story 24: families that are not unique are:",i[0], j[0]
+            
+            if ((j[0]!=i[0]) and (Getname(individual_list,j[2])==wname) and (j[3]==mdate)):
+                return"error user story 24: families that are not unique are:",i[0], j[0]
+            
+    return"no errors in user story 24: all families unique"
+
+
+def list_large_age_difference(individual_list, family_list):#user story 34 
+    large_difference_list=list()
+    for i in family_list:
+        hid=i[1]
+        wid=i[2]
+        m_date=i[3]
+        m_year=int(m_date[0:4])
+        for j in individual_list:
+            if j[0]==hid:
+                h_bd=j[3]
+                h_yr=int(h_bd[0:4])
+        for k in individual_list:
+            if k[0]==wid:
+                w_bd=k[3]
+                w_yr=int(w_bd[0:4])
+        
+        a1=m_year-h_yr
+        a2=m_year-w_yr
+        if (a1/2>a2) or (a2/2>a1):
+            large_difference_list.append(i[0])
+
+    return "ERROR user story 34 : list of families of large age difference between spouse", large_difference_list
+
+
+def list_of_orphans(individual_list, family_list): # user story 33 
+    orphanlist = list()
+    for i in family_list:
+        hid = i[1]
+        wid = i[2]
+        if len(i[5])== 0:
+            continue
+        for child in i[5]:
+            for j in individual_list:
+                if j[0] == child and (calculate_age(j[3], j[4]) < 18):
+                    for k in individual_list:
+                        if k[0] == hid and k[4] != "NA":
+                            for l in individual_list:
+                                if l[0] == wid and l[4] != "NA":
+                                    orphanlist.append(child)
+    return "Error user story 33 : list of orphans are", orphanlist
+
+
+
+
 #Running User Stories
 # Running User Stories
 print("US 03", birth_before_death(individual_list))
@@ -553,3 +614,8 @@ print(male_last_names(individual_list,family_list)) #running user story 16
 check_no_marriage_to_children = no_marriage_to_children(individual_list,family_list)# running user story 17
 Unique_name_and_birthday(individual_list)  # Running user story 23
 Birth_before_mariage_of_parents(individual_list, family_list)  # Runnning User story 08
+
+
+print(unique_families_by_spouses(family_list, individual_list))#running user story 24
+print(list_of_orphans(individual_list, family_list))#running user story 33
+print(list_large_age_difference(individual_list, family_list)) # running 34
