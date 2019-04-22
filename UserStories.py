@@ -68,7 +68,7 @@ def marriage_before_death(family_list, individual_list):  # user story 05
             for j in family_list:
                 if i[5] == j[0] and i[0] == j[1]:
                     if j[3] > i[4]:
-                        print("Error: ", j[0],
+                        print("Error: US 05", j[0],
                               "family has death before marriage")
                         l.append(j[0])
     return l, " list of families who do not have marriage date before death date of one of the members"
@@ -79,13 +79,13 @@ def fewer_than_15_siblings(family_list):  # user story 15
     l = list()
     for i in family_list:
         if len(i[5]) > 14:
-            print("Error: ", i[0],
+            print("Error: US 15", i[0],
                   "family has more than 15 or greater siblings")
             l.append(i[0])
     return l, " list of families have 15 or more siblings"
 
 
-def birth_before_death(individual_list):
+def birth_before_death(individual_list): # user story 03
     """Check if death before birth"""
     l = []
     for i in individual_list:
@@ -99,7 +99,7 @@ def birth_before_death(individual_list):
     return l
 
 
-def birth_before_marriage(individual_list, family_list):  # user story 03
+def birth_before_marriage(individual_list, family_list):  # user story 02
     """Check if married before birth"""
     l = []
     for i in individual_list:
@@ -286,7 +286,7 @@ def Unique_name_and_birthday(individual_list):
     for i in individual_list:
         for j in individual_list:
             if i[0] != j[0]:
-                if i[1]== j[1] and i[3]== j[3]:
+                if i[1] == j[1] and i[3] == j[3]:
                     str = f"Error: US23 {i[1]} Birth at {i[3]} have been duplicated "
                     print(str)
     return str
@@ -436,7 +436,7 @@ def male_last_names(individual_list, family_list): #user story 16
                 if j[2]=="M":
                     m_child_name=j[1].split()
                     if m_child_name[-1]  != father_last_name:
-                        return ("error in family",i[0]," male child last name not the same as fathers last name" )
+                        return ("error: US 16 in family",i[0]," male child last name not the same as fathers last name" )
 
     return("all male child last names in the family are the same.")
 
@@ -541,7 +541,7 @@ def list_large_age_difference(individual_list, family_list):#user story 34
             if (a1/2>a2) or (a2/2>a1):
                 large_difference_list.append(i[0])
 
-    return "ERROR user story 34 : list of families of large age difference between spouse", large_difference_list
+    return "ERROR US 34 : list of families of large age difference between spouse", large_difference_list
 
 
 def list_of_orphans(individual_list, family_list): # user story 33 
@@ -559,7 +559,7 @@ def list_of_orphans(individual_list, family_list): # user story 33
                             for l in individual_list:
                                 if l[0] == wid and l[4] != "NA":
                                     orphanlist.append(child)
-    return "Error user story 33 : list of orphans are", orphanlist
+    return "Error US 33 : list of orphans are", orphanlist
 
 
 
@@ -604,3 +604,6 @@ print(list_large_age_difference(individual_list, family_list)) # running 34
 check_Aunts_and_uncles = Aunts_and_uncles(individual_list, family_list) # Running 20
 
 living_single = list_living_single(individual_list) # Running 31
+
+checked_correct_gender_for_role = correct_gender_for_role(family_list, individual_list) #Running 21
+checked_unique_ids = unique_ids(family_list, individual_list) # Running 22
