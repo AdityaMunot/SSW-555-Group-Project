@@ -93,12 +93,12 @@ class GedreaderTest(unittest.TestCase):
 	def test_birth_before_death(self):
 		"""for death before birth US US 02"""
 		self.assertEqual(birth_before_death(individual_list), [
-		                 ('Error: User', '@I6@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
+						 ('Error: User', '@I6@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
 
 	def test_birth_before_marriage(self):
 		"""test birth before marriage US 03"""
 		self.assertEqual((birth_before_marriage(individual_list, family_list)), [
-		                 ('Error: User', '@F1@', 'was born before marraige'), ('Error: User', '@F4@', 'was born before marraige')])
+						 ('Error: User', '@F1@', 'was born before marraige'), ('Error: User', '@F4@', 'was born before marraige')])
 
 	def test_sibling_should_not_mawrry(self):
 		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
@@ -139,12 +139,12 @@ class TestBirthDay(unittest.TestCase):
 
 # User Story 20
 	def test_aunts_and_uncles(self):
-        error = 2
-        self.assertEqual(check_Aunts_and_uncles, error)
+		error = 2
+		self.assertEqual(check_Aunts_and_uncles, error)
 # User Story 31
-    def test_list_living_single(self):
-        listsingle = ['@I13@']
-        self.assertEqual(living_single, listsingle)
+	def test_list_living_single(self):
+		listsingle = ['@I13@']
+		self.assertEqual(living_single, listsingle)
 
 
 if __name__ == '__main__':
