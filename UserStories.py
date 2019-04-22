@@ -509,35 +509,30 @@ def Unique_families_by_spouses(family_list):
 
 #User Story 28
 #Order siblings by age for families
-def Order_sibling_by_age(individual_list, family_list):
-    for family in family_list:
-        siblings = []
-        for child in family[5]:
-            for i in individual_list:
-                if i[0] == child:
-                    j = 0
-                    for sibling in siblings:
-                        print(str(calculate_age(sibling[3], sibling[4])) + "::" + str(calculate_age(i[3], i[4])))
-                        if calculate_age(sibling[3], sibling[4]) < calculate_age(i[3], i[4]):
-                            siblings.insert(j, i)
-                            break
-                        j += 1
-                    siblings.append(i)
-        print(siblings)
+def order_sibling_by_age(): #User story 28
+	whole_list = []
+	for ind in family_list:
+		ordered_list = []
+		#print(ind[0],ind[5])
+		for sibling in ind[5]:
+			for j in individual_list:
+				if sibling == j[0]:
+					ordered_list.append((j[3])[:4])
+			ordered_list.sort()
+		whole_list.append((ind[0], ordered_list))
+	return whole_list
 
 #Running User Stories
-print(birth_before_death(individual_list))
-print(birth_before_marriage(individual_list, family_list))
-print(list(marriage_under_age_14()))
-print((parents_birth_before_death()))
-check_correct_gender_for_role = correct_gender_for_role(family_list, individual_list)  # Running User Story 21
-check_unique_ids = unique_ids(family_list,individual_list)  # Running User Story 22
-print(list(sibling_should_not_mawrry()))
-print(list(first_cousin_should_not_marry()))
-print("list of living married", list(list_living_married()))
-print("list of people with unique name", list(unique_first_name()))
-Order_sibling_by_age(individual_list, family_list)
-
+# Running User Stories
+print("US 03", birth_before_death(individual_list))
+print("US 02", birth_before_marriage(individual_list, family_list))
+print("US10", list(marriage_under_age_14()))
+print("US 09", (parents_birth_before_death()))
+print("US 18", list(sibling_should_not_mawrry()))
+print("US19", list(first_cousin_should_not_marry()))
+print("US 30 list of living married", list(list_living_married()))
+print("US 25 list of people with unique name", list(unique_first_name()))
+print("US 28 ordered siblings by age", list(order_sibling_by_age()))
 
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
 CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
