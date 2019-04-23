@@ -149,6 +149,9 @@ class GedreaderTest(unittest.TestCase):
 	def test_unique_families_by_spouses(self):
 		self.assertEqual(unique_families_by_spouses(family_list, individual_list),('error user story 24: families that are not unique are:', '@F13@', '@F14@'))
 
+	def test_siblings_by_age(self):
+		self.assertEqual(order_sibling_by_age(),[('@F1@', ['2017', '2017', '2017', '2017', '2017', '2017', '2017', '2017', '2017', '2018', '2018', '2018', '2018', '2018', 'NA', 'NA']), ('@F2@', ['1993', '2018', '2018', '2018', '2018', '2018', '2018', '2018']), ('@F4@', ['NA']), ('@F3@', ['1991', '1996', '1998', '2009', '2010', '2017']), ('@F5@', []), ('@F6@', []), ('@F7@', ['NA']), ('@F8@', ['2018']), ('@F9@', []), ('@F10@', ['2009', '2009', '2009']), ('@F11@', []), ('@F12@', ['2006', '2007']), ('@F13@', []), ('@F14@', ['2007']), ('@F15@', []), ('@F16@', ['2010'])])
+
 
 if __name__ == '__main__':
 	unittest.main(exit=False, verbosity=2)
