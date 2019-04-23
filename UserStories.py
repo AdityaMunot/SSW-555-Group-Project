@@ -562,48 +562,47 @@ def list_of_orphans(individual_list, family_list): # user story 33
 	return "Error US 33 : list of orphans are", orphanlist
 
 
+def list_deceased(individual_list): # User Story 29
+	list_death = list()
+	count_death = 0
+	for i in individual_list:
+		if i[4] != "NA":
+			list_death.append(i)
+			count_death +=1
+	return list_death, count_death
+	
 
-
-#Running User Stories
 # Running User Stories
-print("US 03", birth_before_death(individual_list))
-print("US 02", birth_before_marriage(individual_list, family_list))
-print("US10", list(marriage_under_age_14()))
-print("US 09", (parents_birth_before_death()))
-print("US 18", list(sibling_should_not_mawrry()))
-print("US19", list(first_cousin_should_not_marry()))
-print("US 30 list of living married", list(list_living_married()))
-print("US 25 list of people with unique name", list(unique_first_name()))
-print("US 28 ordered siblings by age", list(order_sibling_by_age()))
-
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
 CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
+print("US 02", birth_before_marriage(individual_list, family_list))  # Running User Story 2
+print("US 03", birth_before_death(individual_list))   # Running User Story 3
+Checked_Mar_bef_div = Marriage_before_divorce(family_list)  # Running User Story 4
+Checked_marriage_before_death = marriage_before_death(family_list, individual_list)  # Running User 05
 Checked_Div_bef_dea = Divorce_before_death(family_list)  # Running User Story 6
-Checked_Mar_bef_div = Marriage_before_divorce(
-	family_list)  # Running User Story 4
 checked_Les_Th_150 = lessthen150(individual_list)  # Running User Story 7
-Checked_marriage_before_death = marriage_before_death(
-	family_list, individual_list)  # Running User 05
-Checked_fewer_than_15_siblings = fewer_than_15_siblings(
-	family_list)  # Running User Story 15
-
+Birth_before_mariage_of_parents(individual_list, family_list)  # Runnning User story 08
+print("US 09", (parents_birth_before_death()))  # Runnning User story 09
+print("US10", list(marriage_under_age_14()))  # Runnning User story 10
 checked_no_bigamy = no_bigamy(family_list, individual_list)  # Running User Story 11
 checked_parents_not_too_old = parents_not_too_old(family_list, individual_list)  # Running User Story 12
 checked_Sibling_spacing = Siblings_spacing() # running User Story 13
 checked_Multiple_birth = Multiple_birth() # running User Story 14
+Checked_fewer_than_15_siblings = fewer_than_15_siblings(family_list)  # Running User Story 15
 print(male_last_names(individual_list,family_list)) #running user story 16
 check_no_marriage_to_children = no_marriage_to_children(individual_list,family_list)# running user story 17
-Unique_name_and_birthday(individual_list)  # Running user story 23
-Birth_before_mariage_of_parents(individual_list, family_list)  # Runnning User story 08
-
-
-print(unique_families_by_spouses(family_list, individual_list))#running user story 24
-print(list_of_orphans(individual_list, family_list))#running user story 33
-print(list_large_age_difference(individual_list, family_list)) # running 34
-
-check_Aunts_and_uncles = Aunts_and_uncles(individual_list, family_list) # Running 20
-
-living_single = list_living_single(individual_list) # Running 31
-
+print("US 18", list(sibling_should_not_mawrry()))  # Running user story 18
+print("US19", list(first_cousin_should_not_marry()))  # Running user story 19
+check_Aunts_and_uncles = Aunts_and_uncles(individual_list, family_list) # Running user story 20
 checked_correct_gender_for_role = correct_gender_for_role(family_list, individual_list) #Running 21
 checked_unique_ids = unique_ids(family_list, individual_list) # Running 22
+Unique_name_and_birthday(individual_list)  # Running user story 23
+print(unique_families_by_spouses(family_list, individual_list))#running user story 24
+print("US 25 list of people with unique name", list(unique_first_name()))  # Running User Story 25
+print("US 28 ordered siblings by age", list(order_sibling_by_age()))  # Running User Story 28
+checked_list_deceased,count_death = list_deceased(individual_list)  # Running User Story 29
+print("US 29:",checked_list_deceased)
+print("US 30 list of living married", list(list_living_married()))  # Running User Story 30
+living_single = list_living_single(individual_list)  # Running User Story 31
+print(list_of_orphans(individual_list, family_list))#running user story 33
+print(list_large_age_difference(individual_list, family_list)) # running 34
