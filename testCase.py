@@ -18,9 +18,8 @@ class GedreaderTest(unittest.TestCase):
 				self.assertLess(datetime.strptime(i[4], "%Y %b %d"), today)
 	
 	def test_marriage_before_death(self):
-		self.assertEqual(marriage_before_death(family_list, individual_list),(['@F4@'], " list of families who do not have marriage date before death date of one of the members"))
-		self.assertNotEqual(marriage_before_death(family_list, individual_list), 1)
-		self.assertTrue(marriage_before_death(family_list, individual_list))
+		self.assertEqual(marriage_before_death(family_list, individual_list),(['@F4@', '@F16@'], " list of families who do not have marriage date before death date of one of the members"))
+
 
 	def test_MarriedDates(self):  # testCase for Check Married
 		today = datetime.today()
@@ -62,7 +61,7 @@ class GedreaderTest(unittest.TestCase):
 	def test_marr_before_14(self):
 		a = [('Error,', '@F1@', 'married when less than 14'),
 			 ('Error,', '@F4@', 'married when less than 14'),
-			 ('Error,', '@F9@', 'married when less than 14')]
+			 ('Error,', '@F10@', 'married when less than 14')]
 		self.assertEqual(list(marriage_under_age_14()), a)
 
 	def test_parents_birth_bfr_death(self):
@@ -83,17 +82,17 @@ class GedreaderTest(unittest.TestCase):
 	def test_Multiple_birth(self):
 		error = 1
 		self.assertEqual(checked_Multiple_birth, error)
-		"""
+
 	def test_correct_gender_for_role(self):  # test case for user story 21
 		self.assertEqual(checked_correct_gender_for_role, 1)
-		"""
+
 	def test_unique_ids(self):  # test case for user story 22
-		self.assertEqual(checked_unique_ids, 0)
+		self.assertEqual(checked_unique_ids, 1)
 
 	def test_birth_before_death(self):
 		"""for death before birth US US 02"""
 		self.assertEqual(birth_before_death(individual_list), [
-						 ('Error: User', '@I6@', 'was dead before birth'), ('Error: User', '@I11@', 'was dead before birth')])
+						 ('Error: User', '@I7@', 'was dead before birth'), ('Error: User', '@I12@', 'was dead before birth')])
 
 	def test_birth_before_marriage(self):
 		"""test birth before marriage US 03"""
@@ -101,37 +100,30 @@ class GedreaderTest(unittest.TestCase):
 						 ('Error: User', '@F1@', 'was born before marraige'), ('Error: User', '@F4@', 'was born before marraige')])
 
 	def test_sibling_should_not_mawrry(self):
-		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I7@', '@I8@')])
+		self.assertEqual(sibling_should_not_mawrry(),[('Error both are sibblings but married', '@I8@', '@I9@'), ('Error both are sibblings but married', '@I35@', '@I38@')])
 
 	def test_first_cousin_should_not_marry(self):
-		self.assertEqual(first_cousin_should_not_marry(),[('@I7@', '@I8@'), ('@I21@', '@I20@'), ('@I26@', '@I27@'), ('@I24@', '@I23@'), ('@I36@', '@I38@')])
-		"""
+		self.assertEqual(first_cousin_should_not_marry(),[('@I8@', '@I9@'), ('@I22@', '@I21@'), ('@I27@', '@I28@'), ('@I25@', '@I24@'), ('@I36@', '@I39@'), ('@I41@', '@I43@'), ('@I42@', '@I45@'), ('@I42@', '@I44@'), ('@I46@', '@I47@'), ('@I48@', '@I49@')])
+
 	def test_male_last_names(self):  # test user story 16 test case
-		self.assertEqual(male_last_names(family_list, individual_list), ('error in family','@F2@', ' male child last name not the same as fathers last name'))
-		self.assertNotEqual(male_last_names(family_list, individual_list), 1)
-		self.assertTrue(male_last_names(family_list, individual_list))
-		self.assertIsNotNone(male_last_names(family_list, individual_list))
-		self.assertIsNot(male_last_names(family_list, individual_list), '')
-		"""
+		self.assertEqual(male_last_names(individual_list,family_list), ('error: US 16 in family', '@F2@', ' male child last name not the same as fathers last name'))
 
 	def test_no_marriage_to_children(self):  #test User story 17 test case
-		self.assertEqual(check_no_marriage_to_children, 0)
+		self.assertEqual(check_no_marriage_to_children, 1)
 
 	def test_living_married(self):
 		"""US 30 List of living Married"""
-		self.assertEqual(list_living_married(),['@I5@', '@I11@'])
+		self.assertEqual(list_living_married(),['@I6@', '@I12@', '@I48@'])
 
 	def test_unique_name(self):
 		"""US 25 List of Unique First names"""
-		self.assertEqual(unique_first_name(), ['Michael', 'Holly', 'Jim', 'Pam', 'Dwight', 'Andy', 'Ryan', 'Kelly', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P9', 'P10', 'P11', 'P12', 'P13', 'Cousin', 'P14', 'P15', 'Kappa', 'Krappa', 'Suhas', 'Tina', 'Kim', 'Duhas', 'Fuhas', 'Guhas', 'Huhas', 'Juhas', 'Kuhas', 'Kij', 'Lifu', 'Kifu', 'Fuli', 'Kuli', 'Kuli'])
-"""
-# For User Story 23 8
-class TestBirthDay(unittest.TestCase):
+		self.assertEqual(unique_first_name(), ['Michael', 'Holly', 'Jim', 'Kim', 'Pam', 'Dwight', 'Andy', 'Ryan', 'Kelly', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P9', 'P10', 'P11', 'P12', 'P13', 'Cousin', 'P14', 'P15', 'Kappa', 'Krappa', 'Suhas', 'Tina', 'Duhas', 'Fuhas', 'Guhas', 'Huhas', 'Juhas', 'Kuhas', 'Kij', 'Lifu', 'Fuli', 'Kifu', 'Kuli', 'Kuli', 'Kuli', 'Piju', 'Jupi', 'Siju', 'Piju', 'Sipi', 'Pisi', 'Jusi', 'Kaju', 'Katli', 'Badaam'])
+
 	def test_unique_name_and_birthday(self):
 		self.assertEqual(Unique_name_and_birthday(individual_list), "Error: US23 Kuli Halpert Birth at 2009 OCT 13 have been duplicated ")
 
 	def test_birth_before_mariage_of_parents(self):
-		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: US08 Kuli Halpert Birth before marriage of parents")
+		self.assertEqual(Birth_before_mariage_of_parents(individual_list,family_list), "Error: US08 Badaam Halpert Birth before marriage of parents")
 
 # User Story 20
 	def test_aunts_and_uncles(self):
@@ -142,6 +134,11 @@ class TestBirthDay(unittest.TestCase):
 		listsingle = ['@I13@']
 		self.assertEqual(living_single, listsingle)
 
-"""
+	def test_list_deceased(self):
+		self.assertEqual(count_death, 6)
+	
+	def test_list_age(self):
+		self.assertEqual(count, 51)
+
 if __name__ == '__main__':
 	unittest.main(exit=False, verbosity=2)

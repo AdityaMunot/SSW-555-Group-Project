@@ -355,13 +355,13 @@ def Aunts_and_uncles(individual_list, family_list): #User Story 20 Aunts and unc
 #User Story 31
 #List all living singles
 def list_living_single(individual_list):  # User story 31
-	all_living_over30 = list()
-	for i in individual_list:
-		if calculate_age(i[3], i[4]) != 'NA':
-			if (i[4] == "NA") and (calculate_age(i[3], i[4]) > 30) and (i[5] == "NA"):
-				all_living_over30.append(i[0])
-	print("US 31 list of all living singles over 30", all_living_over30)
-	return all_living_over30
+    all_living_over30 = list()
+    for i in individual_list:
+        if calculate_age(i[3], i[4]) != 'NA':
+            if (i[4] == "NA") and (calculate_age(i[3], i[4]) > 30) and (i[5] == "NA"):
+                all_living_over30.append(i[0])
+    print("US 31 list of all living singles over 30", all_living_over30)
+    return all_living_over30
 
 
 def get_detail(id, individual_list):
@@ -570,9 +570,18 @@ def list_deceased(individual_list): # User Story 29
 			list_death.append(i)
 			count_death +=1
 	return list_death, count_death
-	
+
+def include_individual_ages(individual_list): # user Story 27
+	list_age = list()
+	count = 0
+	for i in individual_list:
+		age = calculate_age(i[3], i[4])
+		list_age.append([i[0],age])
+		count += 1
+	return list_age, count
 
 # Running User Stories
+living_single = list_living_single(individual_list)  # Running User Story 31
 CheckedIndividuals = CheckDates(individual_list)  # Running User Story 1
 CheckedFamilylist = CheckDates(family_list)  # Running User Story 1
 print("US 02", birth_before_marriage(individual_list, family_list))  # Running User Story 2
@@ -599,10 +608,12 @@ checked_unique_ids = unique_ids(family_list, individual_list) # Running 22
 Unique_name_and_birthday(individual_list)  # Running user story 23
 print(unique_families_by_spouses(family_list, individual_list))#running user story 24
 print("US 25 list of people with unique name", list(unique_first_name()))  # Running User Story 25
+list_age, count = include_individual_ages(individual_list) # running user Story 27
+print("US 27 List age with individual", list_age)
 print("US 28 ordered siblings by age", list(order_sibling_by_age()))  # Running User Story 28
 checked_list_deceased,count_death = list_deceased(individual_list)  # Running User Story 29
 print("US 29:",checked_list_deceased)
 print("US 30 list of living married", list(list_living_married()))  # Running User Story 30
-living_single = list_living_single(individual_list)  # Running User Story 31
+
 print(list_of_orphans(individual_list, family_list))#running user story 33
 print(list_large_age_difference(individual_list, family_list)) # running 34
