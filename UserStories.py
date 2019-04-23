@@ -474,7 +474,7 @@ def unique_first_name(): #US 25
 
 #User Story 24
 #Unique families by spouses, only one family for the pair of same name of the spouse and marrige date
-def Unique_families_by_spouses(family_list):
+"""def Unique_families_by_spouses(family_list):
 	str = ''
 	for family in family_list:
 		husband_id = family[1]
@@ -485,7 +485,7 @@ def Unique_families_by_spouses(family_list):
 			elif (family_compair[1] == husband_id and family_compair[2] == wife_id):
 				str += family[0] + " and " + family_compair[0] + " are duplicated!"
 	print(str)
-	return str
+	return str"""
 
 #User Story 28
 #Order siblings by age for families
