@@ -139,6 +139,16 @@ class GedreaderTest(unittest.TestCase):
 	
 	def test_list_age(self):
 		self.assertEqual(count, 51)
+	
+	def test_list_of_orphans(self):
+		self.assertEqual(list_of_orphans(individual_list,family_list),('Error US 33 : list of orphans are', ['@I50@']))
+
+	def test_list_large_age_difference(self):
+		self.assertEqual(list_large_age_difference(individual_list,family_list),('ERROR US 34 : list of families of large age difference between spouse', ['@F1@', '@F4@']))
+
+	def test_unique_families_by_spouses(self):
+		self.assertEqual(unique_families_by_spouses(family_list, individual_list),('error user story 24: families that are not unique are:', '@F13@', '@F14@'))
+
 
 if __name__ == '__main__':
 	unittest.main(exit=False, verbosity=2)
