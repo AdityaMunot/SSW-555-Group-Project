@@ -117,7 +117,7 @@ class GedreaderTest(unittest.TestCase):
 
 	def test_unique_name(self):
 		"""US 25 List of Unique First names"""
-		self.assertEqual(unique_first_name(), ['Michael', 'Holly', 'Jim', 'Kim', 'Pam', 'Dwight', 'Andy', 'Ryan', 'Kelly', 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P9', 'P10', 'P11', 'P12', 'P13', 'Cousin', 'P14', 'P15', 'Kappa', 'Krappa', 'Suhas', 'Tina', 'Duhas', 'Fuhas', 'Guhas', 'Huhas', 'Juhas', 'Kuhas', 'Kij', 'Lifu', 'Fuli', 'Kifu', 'Kuli', 'Kuli', 'Kuli', 'Piju', 'Jupi', 'Siju', 'Piju', 'Sipi', 'Pisi', 'Jusi', 'Kaju', 'Katli', 'Badaam'])
+		self.assertEqual(unique_first_name(), [['Ryan Scott', 'Kelly Scott', 'P1 Scott', 'P2 Scott', 'P3 Scott', 'P4 Scott', 'P5 Scott', 'P6 Scott', 'P7 Scott', 'P9 Scott', 'P10 Scott', 'P11 Scott', 'P12 Scott', 'P13 Scott', 'P14 Scott', 'P15 Scott'], ['Michael Scott', 'Suhas Halpert', 'Duhas Halpert', 'Fuhas Halpert', 'Guhas Halpert', 'Huhas Halpert', 'Juhas Halpert', 'Kuhas Halpert'], ['Dwight Bernard'], ['Kij Halpert', 'Lifu Halpert', 'Kifu Halpert', 'Piju Halpert', 'Jupi Halpert', 'Kaju Halpert'], [], [], ['Cousin Halpert'], ['Krappa Chino'], [], ['Kuli Halpert', 'Kuli Halpert', 'Kuli Halpert'], [], ['Sipi Halpert', 'Pisi Halpert'], [], ['Jusi Halpert'], [], ['Badaam Halpert']])
 
 	def test_unique_name_and_birthday(self):
 		self.assertEqual(Unique_name_and_birthday(individual_list), "Error: US23 Kuli Halpert Birth at 2009 OCT 13 have been duplicated ")

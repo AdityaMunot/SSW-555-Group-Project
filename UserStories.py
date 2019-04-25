@@ -1,6 +1,6 @@
 from HW3AdityaMunot import *
 from datetime import timedelta
-
+import collections
 
 def CheckDates(Tlist):  # Check dates in gedcom file are before current date
 	today = datetime.today()
@@ -462,18 +462,18 @@ def list_living_married(): # US 30
 			married_list.append(i[0])
 	return married_list
 
-
 def unique_first_name(): #US 25
-	"""list of people with unique names"""
-	list_first_name = []
-	for i in individual_list:
-		fname = i[1].split()
-		if fname not  in list_first_name:
-			list_first_name.append(fname[0])
-	return list_first_name
+	whole_family = []
+	for i in family_list:
+		list_first_name = []
+		for j in i[5]:
+			for k in individual_list:
+				if k[0] == j:
+					list_first_name.append(k[1])
+		set(list_first_name)
+		whole_family.append(list_first_name)
+	return whole_family
 
-#User Story 24
-#Unique families by spouses, only one family for the pair of same name of the spouse and marrige date
 """def Unique_families_by_spouses(family_list):
 	str = ''
 	for family in family_list:
